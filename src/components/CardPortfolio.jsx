@@ -4,8 +4,7 @@ import { Box, Avatar, Link } from "@mui/material";
 import { shadows } from "@mui/system";
 import { useTheme } from "@mui/material/styles";
 
-export default function ImgCard({ data }) {
-    const { title, srcImg, folder, numImg } = data;
+export default function CardPortfolio({ title, srcImg, folder, numImg }) {
     const theme = useTheme();
 
     return (

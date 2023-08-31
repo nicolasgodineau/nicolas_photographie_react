@@ -1,23 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { Container, Avatar, Link } from "@mui/material";
 
 import homelogo from "../img/Ressources/logo/logo_index_blanc.svg";
-import logo from "../img/Ressources/logo/Logo_menu.svg";
+import logoLight from "../img/Ressources/logo/logoLight.svg";
+import logoDark from "../img/Ressources/logo/logoDark.svg";
 import ChangeLanguageButton from "./ChangeLanguageButton.jsx";
 import ChangeThemeButton from "./ChangeThemeButton.jsx";
 
 import { useTheme } from "@mui/material/styles";
+import SettingsMenu from "./SettingsMenu.jsx";
 
 export default function Nav() {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const theme = useTheme();
-
     const location = useLocation();
-    const isHome = location.pathname === "/";
+    const [isBlurred, setIsBlurred] = useState(false);
 
+    // Permet d'activer le blur du menu au scroll
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 1) {
+                setIsBlurred(true);
+            } else {
+                setIsBlurred(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
+    // Pour savoir si on est sur la page d'accueil, si oui alors on applique un certaint style
+    const isHome = location.pathname === "/";
     // Styles pour la page d'accueil
     const PropsHeader = {
         width: "50vmax",
@@ -28,7 +48,20 @@ export default function Nav() {
         justifyContent: "space-evenly",
         paddingY: "2rem",
         backdropFilter: "blur(20px)",
-        backgroundColor: "#ffffff0e",
+        backgroundColor: theme.palette.nav,
+    };
+
+    // Styles pour les autres pages
+    const containerStyle = {
+        position: "sticky",
+        top: "0",
+        position: "sticky",
+        top: "0",
+        zIndex: "10",
+        backgroundColor: theme.palette.nav,
+        ...(isBlurred && {
+            backdropFilter: "blur(20px) saturate(0)",
+        }),
     };
 
     return (
@@ -36,24 +69,19 @@ export default function Nav() {
             component="header"
             maxWidth={false}
             disableGutters={true}
-            sx={
-                isHome
-                    ? PropsHeader
-                    : {
-                          position: "sticky",
-                          top: "0",
-                          zIndex: "9999",
-                          backgroundColor:
-                              theme.palette.mode === "light"
-                                  ? "#fafafa"
-                                  : "#212121",
-                      }
-            }
+            sx={isHome ? PropsHeader : containerStyle}
         >
+            {/* <SettingsMenu /> */}
             <Container maxWidth="logo" disableGutters={true}>
                 <Avatar
                     variant="square"
-                    src={isHome ? homelogo : logo}
+                    src={
+                        isHome
+                            ? homelogo
+                            : theme.palette.mode === "light"
+                            ? logoLight
+                            : logoDark
+                    }
                     sx={{
                         height: "100%",
                         width: "100%",
@@ -105,8 +133,8 @@ export default function Nav() {
                 >
                     {t("contact")}
                 </Link>
-                {isHome ? null : <ChangeLanguageButton />}
-                {isHome ? null : <ChangeThemeButton isHome={isHome} />}
+                {/*                 {isHome ? null : <ChangeLanguageButton />}
+                {isHome ? null : <ChangeThemeButton isHome={isHome} />} */}
             </Container>
         </Container>
     );

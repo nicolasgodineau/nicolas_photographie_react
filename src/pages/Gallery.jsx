@@ -1,21 +1,16 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import {
-    Container,
-    CardContent,
-    ImageListItem,
-    ImageList,
-    Avatar,
-    Link,
-    Typography,
-} from "@mui/material";
-import ImgCard from "../components/ImgCard.jsx";
+import { Avatar, Container, ImageList, Typography } from "@mui/material";
+import ImgCard from "../components/CardPortfolio.jsx";
 import Nav from "../components/Nav.jsx";
 import { useTheme } from "@mui/material/styles";
 import Footer from "../components/Footer.jsx";
 
+import Fancybox from "../components/Fancybox.jsx";
+console.log("Fancybox:", Fancybox);
+
 function Gallery() {
-    const location = useLocation();
+    const location = useLocation("/portfolio");
     const theme = useTheme();
     const { folder, num } = location.state;
 
@@ -32,7 +27,7 @@ function Gallery() {
         <>
             <Nav />
             <Container
-                component="section"
+                component="main"
                 maxWidth="lg"
                 disableGutters={false}
                 sx={{
@@ -41,7 +36,7 @@ function Gallery() {
                     flexDirection: "column",
                     justifyContent: "space-between",
                     gap: "1rem",
-                    padding: "0",
+                    padding: "2rem 0 3rem 0",
                 }}
             >
                 <Typography
@@ -55,7 +50,7 @@ function Gallery() {
                                 : theme.palette.secondary,
                     }}
                 >
-                    {folder}{" "}
+                    {folder}
                 </Typography>
                 <ImageList
                     cols={4}
@@ -64,13 +59,11 @@ function Gallery() {
                     }}
                 >
                     {images.map((image, index) => (
-                        <ImageListItem key={index}>
-                            <img
-                                src={image}
-                                alt={`Collage ${index + 1}`}
-                                loading="lazy"
-                            />
-                        </ImageListItem>
+                        <Fancybox
+                            href={image}
+                            src={image}
+                            alt={`Collage ${index + 1}`}
+                        />
                     ))}
                 </ImageList>
             </Container>

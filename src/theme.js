@@ -15,6 +15,7 @@ export const lightTheme = createTheme({
             default: grey[50],
         },
         accent: grey[900],
+        nav: "#fafafa7a",
     },
     breakpoints: {
         values: {
@@ -38,9 +39,10 @@ export const darkTheme = createTheme({
             main: green[900],
         },
         background: {
-            default: grey[900],
+            /*  */ default: grey[900],
         },
         accent: grey[50],
+        nav: "#2121217a",
     },
     breakpoints: {
         values: {

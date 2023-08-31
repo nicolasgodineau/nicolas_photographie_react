@@ -6,12 +6,11 @@ import { Container, Link } from "@mui/material";
 
 import Nav from "../components/Nav.jsx";
 
-import ImgCard from "../components/ImgCard.jsx";
+import CardPortfolio from "../components/CardPortfolio.jsx";
 
 export default function Portfolio() {
     const { t } = useTranslation();
 
-    // Sélectionne le tableau de traductions en fonction de la langue et l'utilise pour l'affichage
     const portfolioCards = t("portfolio.cards", { returnObjects: true }) || [];
 
     return (
@@ -40,17 +39,12 @@ export default function Portfolio() {
                     }}
                 >
                     {portfolioCards.map((card, index) => (
-                        <ImgCard
+                        <CardPortfolio
                             key={index}
-                            data={{
-                                title: card.title,
-                                srcImg: card.imgSrc,
-                                folder: card.folder,
-                                numImg: card.num,
-                                withText: true,
-                                withFolder: true,
-                                withNum: true,
-                            }}
+                            title={card.title}
+                            srcImg={card.imgSrc}
+                            folder={card.folder}
+                            numImg={card.num}
                         />
                     ))}
                 </Container>

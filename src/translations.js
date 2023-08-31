@@ -26,6 +26,28 @@ i18n.use(initReactI18next).init({
                     "It was at the age of 20, with my first camera, that I discovered a passion for photography. Today, I share my photographs with you, fragments of emotions and reflections of who I am and what I love.",
                 paragraph4:
                     "Feel free to contact me to discuss potential collaborations!",
+                contactText: {
+                    intro: [
+                        {
+                            element: "Né à Bordeaux en France.",
+                        },
+                        {
+                            element:
+                                "j’ai passé mon enfance bercé par le bruit des déclenchements d’appareil photo de mon père.",
+                        },
+                        {
+                            element:
+                                "C’est à l’âge de 20 ans et avec mon premier appareil photo que je me suis découvert une passion pour la photographie. Aujourd’hui, je partage mes photographies avec vous, fragments d’émotions et reflet de ce que je suis, de ce que j’aime.",
+                        },
+                        {
+                            element:
+                                "N’hésitez pas à me contacter pour discuter ensemble d’une potentielle collaboration !",
+                        },
+                        {
+                            element: "Nicolas",
+                        },
+                    ],
+                },
                 portfolio: {
                     title: "Portfolio",
                     cards: [
@@ -79,6 +101,28 @@ i18n.use(initReactI18next).init({
                     "C’est à l’âge de 20 ans, avec mon premier appareil photo, que j’ai découvert ma passion pour la photographie. Aujourd’hui, je partage mes photographies avec vous, fragments d’émotions et reflets de ce que je suis et de ce que j’aime.",
                 paragraph4:
                     "N’hésitez pas à me contacter pour discuter d’une éventuelle collaboration !",
+                contactText: {
+                    intro: [
+                        {
+                            element: "Né à Bordeaux en France.",
+                        },
+                        {
+                            element:
+                                "j’ai passé mon enfance bercé par le bruit des déclenchements d’appareil photo de mon père.",
+                        },
+                        {
+                            element:
+                                "C’est à l’âge de 20 ans et avec mon premier appareil photo que je me suis découvert une passion pour la photographie. Aujourd’hui, je partage mes photographies avec vous, fragments d’émotions et reflet de ce que je suis, de ce que j’aime.",
+                        },
+                        {
+                            element:
+                                "N’hésitez pas à me contacter pour discuter ensemble d’une potentielle collaboration !",
+                        },
+                        {
+                            element: "Nicolas",
+                        },
+                    ],
+                },
                 portfolio: {
                     title: "Portfolio",
                     cards: [

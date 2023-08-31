@@ -10,6 +10,7 @@ import Portfolio from "./pages/Portfolio.jsx";
 
 import { lightTheme, darkTheme } from "./theme.js";
 import Gallery from "./pages/Gallery.jsx";
+import Contact from "./pages/Contact.jsx";
 
 export default function App() {
     const [mode, setMode] = useState("light");
@@ -23,6 +24,7 @@ export default function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/portfolio" element={<Portfolio />} />
                     <Route path="/gallery" element={<Gallery />} />
+                    <Route path="/contact" element={<Contact />} />
                 </Routes>
             </CustomThemeProvider>
         </MuiThemeProvider>
