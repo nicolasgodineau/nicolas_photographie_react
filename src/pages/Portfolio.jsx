@@ -1,11 +1,12 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+
+// Multilingue
 import { useTranslation } from "react-i18next";
 
-import { Container, Link } from "@mui/material";
+// CSS & MUI
+import { Container, Grid } from "@mui/material";
 
-import Nav from "../components/Nav.jsx";
-
+// Componentes & Pages & Autre
 import CardPortfolio from "../components/CardPortfolio.jsx";
 
 export default function Portfolio() {
@@ -14,41 +15,41 @@ export default function Portfolio() {
     const portfolioCards = t("portfolio.cards", { returnObjects: true }) || [];
 
     return (
-        <>
-            <Nav />
+        <Container
+            component="main"
+            maxWidth="lg"
+            sx={{
+                height: "calc(100vh - 40vh)",
+                display: "flex",
+                alignItems: "center",
+                backgroundColor: "primary",
+            }}
+        >
             <Container
-                component="main"
-                maxWidth="lg"
+                component="section"
+                maxWidth={false}
+                disableGutters={true}
                 sx={{
-                    height: "calc(100vh - 40vh)",
+                    width: "100%",
                     display: "flex",
-                    alignItems: "center",
-                    backgroundColor: "primary",
+                    justifyContent: "space-between",
+                    gap: "1rem",
+                    padding: "0",
                 }}
             >
-                <Container
-                    component="section"
-                    maxWidth={false}
-                    disableGutters={true}
-                    sx={{
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        gap: "1rem",
-                        padding: "0",
-                    }}
-                >
+                <Grid container spacing={2}>
                     {portfolioCards.map((card, index) => (
-                        <CardPortfolio
-                            key={index}
-                            title={card.title}
-                            srcImg={card.imgSrc}
-                            folder={card.folder}
-                            numImg={card.num}
-                        />
+                        <Grid item key={index} xs={12} sm={6} md={3}>
+                            <CardPortfolio
+                                title={card.title}
+                                srcImg={card.imgSrc}
+                                folder={card.folder}
+                                numImg={card.num}
+                            />
+                        </Grid>
                     ))}
-                </Container>
+                </Grid>
             </Container>
-        </>
+        </Container>
     );
 }

@@ -1,11 +1,18 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-// Routage
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
 
+// Routage
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+
+// Multilingue
 import i18n from "./translations.js";
 import { I18nextProvider } from "react-i18next";
+
+// CSS & MUI
+import "./index.css";
+
+// Componentes & Pages
+import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

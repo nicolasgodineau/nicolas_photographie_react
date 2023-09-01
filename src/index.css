@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Poiret+One&display=swap");
 
+body {
+    height: 100svh;
+}
+
 .fancybox__backdrop {
     backdrop-filter: blur(10px);
     background: rgba(24, 24, 27, 0.62);

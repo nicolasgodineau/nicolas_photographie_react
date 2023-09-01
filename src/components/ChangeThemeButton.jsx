@@ -23,6 +23,7 @@ export default function ChangeThemeButton() {
             "&.Mui-checked": {
                 color: "#fff",
                 transform: "translateX(22px)",
+                transition: "transform 0.1s ease-in-out",
                 "& .MuiSwitch-thumb:before": {
                     backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
                         "#fafafa"
@@ -30,8 +31,7 @@ export default function ChangeThemeButton() {
                 },
                 "& + .MuiSwitch-track": {
                     opacity: 1,
-                    backgroundColor:
-                        theme.palette.mode === "dark" ? "#212121" : "#fafafa",
+                    backgroundColor: "#bdbdbd",
                 },
             },
         },
@@ -56,8 +56,7 @@ export default function ChangeThemeButton() {
         },
         "& .MuiSwitch-track": {
             opacity: 1,
-            backgroundColor:
-                theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
+            backgroundColor: "#bdbdbd",
             borderRadius: 20 / 2,
         },
     }));

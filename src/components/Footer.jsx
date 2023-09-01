@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+
 import { Container, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 export default function Footer() {
-    const { t, i18n } = useTranslation();
     const theme = useTheme();
     const currentYear = new Date().getFullYear();
     const [isBlurred, setIsBlurred] = useState(false);
@@ -41,6 +40,7 @@ export default function Footer() {
                     backgroundColor: theme.palette.nav,
                     backdropFilter: "blur(20px) saturate(0)",
                 }),
+                zIndex: "10",
             }}
         >
             <Typography

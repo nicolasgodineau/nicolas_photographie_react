@@ -7,8 +7,6 @@ import { Container, Avatar, Link } from "@mui/material";
 import homelogo from "../img/Ressources/logo/logo_index_blanc.svg";
 import logoLight from "../img/Ressources/logo/logoLight.svg";
 import logoDark from "../img/Ressources/logo/logoDark.svg";
-import ChangeLanguageButton from "./ChangeLanguageButton.jsx";
-import ChangeThemeButton from "./ChangeThemeButton.jsx";
 
 import { useTheme } from "@mui/material/styles";
 import SettingsMenu from "./SettingsMenu.jsx";
@@ -55,8 +53,6 @@ export default function Nav() {
     const containerStyle = {
         position: "sticky",
         top: "0",
-        position: "sticky",
-        top: "0",
         zIndex: "10",
         backgroundColor: theme.palette.nav,
         ...(isBlurred && {
@@ -71,7 +67,6 @@ export default function Nav() {
             disableGutters={true}
             sx={isHome ? PropsHeader : containerStyle}
         >
-            {/* <SettingsMenu /> */}
             <Container maxWidth="logo" disableGutters={true}>
                 <Avatar
                     variant="square"
@@ -116,6 +111,8 @@ export default function Nav() {
                 >
                     {t("portfolio.title")}
                 </Link>
+                {isHome ? null : <SettingsMenu />}
+
                 <Link
                     rel="noopener noreferrer"
                     underline="none"
@@ -133,8 +130,6 @@ export default function Nav() {
                 >
                     {t("contact")}
                 </Link>
-                {/*                 {isHome ? null : <ChangeLanguageButton />}
-                {isHome ? null : <ChangeThemeButton isHome={isHome} />} */}
             </Container>
         </Container>
     );

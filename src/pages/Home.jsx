@@ -1,11 +1,12 @@
-import { Container } from "@mui/material";
 import React from "react";
-import { useTranslation } from "react-i18next";
+// CSS & MUI
+import { Container } from "@mui/material";
+
+// Componentes & Pages & Autre
 import background from "../img/Ressources/index.webp";
 import Nav from "../components/Nav.jsx";
 
 export default function Home() {
-    const { t } = useTranslation();
     return (
         <Container
             maxWidth="false"

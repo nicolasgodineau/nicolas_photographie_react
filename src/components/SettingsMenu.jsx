@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { IconButton, Menu, MenuItem } from "@mui/material";
+import { IconButton, Menu, Box } from "@mui/material";
+import { shadows } from "@mui/system";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ChangeLanguageButton from "./ChangeLanguageButton.jsx";
 import ChangeThemeButton from "./ChangeThemeButton.jsx";
@@ -24,11 +25,22 @@ export default function SettingsMenu() {
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleCloseMenu}
-                sx={{ zIndex: "9999" }}
+                sx={{
+                    ".css-6hp17o-MuiList-root-MuiMenu-list": {
+                        display: "flex",
+                        flexDirection: "column",
+                        alignContent: "center",
+                        justifyContent: "center",
+                        gap: "1rem",
+                    },
+                    ".css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper":
+                        {
+                            borderRadius: "0px",
+                        },
+                }}
             >
                 <ChangeLanguageButton />
                 <ChangeThemeButton />
-                {/* Les éléments de menu vont ici */}
             </Menu>
         </>
     );
