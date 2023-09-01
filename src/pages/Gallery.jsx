@@ -7,6 +7,7 @@ import { Container, ImageList, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 // Componentes & Pages & Autre
+import MainContainer from "../components/MainContainer.jsx";
 import Fancybox from "../components/Fancybox.jsx";
 
 function Gallery() {
@@ -24,19 +25,7 @@ function Gallery() {
     );
 
     return (
-        <Container
-            component="main"
-            maxWidth="lg"
-            disableGutters={false}
-            sx={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                gap: "1rem",
-                padding: "2rem 0 3rem 0",
-            }}
-        >
+        <MainContainer>
             <Typography
                 variant="h1"
                 sx={{
@@ -64,7 +53,7 @@ function Gallery() {
                     />
                 ))}
             </ImageList>
-        </Container>
+        </MainContainer>
     );
 }
 

@@ -1,47 +1,54 @@
-import React, { useState } from "react";
-import { IconButton, Menu, Box } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { IconButton, Menu, Box, Button } from "@mui/material";
 import { shadows } from "@mui/system";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ChangeLanguageButton from "./ChangeLanguageButton.jsx";
 import ChangeThemeButton from "./ChangeThemeButton.jsx";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 export default function SettingsMenu() {
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [showSettings, setShowSettings] = useState(false);
 
-    const handleOpenMenu = (event) => {
-        setAnchorEl(event.currentTarget);
+    const toggleSettings = () => {
+        setShowSettings(!showSettings);
     };
 
-    const handleCloseMenu = () => {
-        setAnchorEl(null);
-    };
+    useEffect(() => {
+        if (showSettings) {
+            const timer = setTimeout(() => {
+                setShowSettings(false);
+            }, 3000);
+
+            return () => {
+                clearTimeout(timer);
+            };
+        }
+    }, [showSettings]);
 
     return (
-        <>
-            <IconButton onClick={handleOpenMenu}>
-                <SettingsIcon />
-            </IconButton>
-            <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleCloseMenu}
-                sx={{
-                    ".css-6hp17o-MuiList-root-MuiMenu-list": {
-                        display: "flex",
-                        flexDirection: "column",
-                        alignContent: "center",
-                        justifyContent: "center",
-                        gap: "1rem",
-                    },
-                    ".css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper":
-                        {
-                            borderRadius: "0px",
-                        },
-                }}
-            >
-                <ChangeLanguageButton />
-                <ChangeThemeButton />
-            </Menu>
-        </>
+        <IconButton
+            sx={{
+                height: "35px",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                alignContent: "center",
+                justifyContent: "center",
+                gap: "1rem",
+                borderRadius: "0px",
+            }}
+        >
+            {showSettings ? (
+                <>
+                    <ChangeLanguageButton />
+                    <CancelIcon onClick={toggleSettings} />
+                    <ChangeThemeButton />
+                </>
+            ) : (
+                <>
+                    <SettingsIcon onClick={toggleSettings} />
+                </>
+            )}
+        </IconButton>
     );
 }

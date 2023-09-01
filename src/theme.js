@@ -16,6 +16,7 @@ export const lightTheme = createTheme({
         },
         accent: grey[900],
         nav: "#fafafa7a",
+        linkActive: "#01579b",
     },
     breakpoints: {
         values: {

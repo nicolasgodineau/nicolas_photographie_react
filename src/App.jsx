@@ -28,13 +28,14 @@ export default function App() {
             <CssBaseline />
             <CustomThemeProvider mode={mode} setMode={setMode}>
                 {isHome ? null : <Nav />}
-                {isHome ? null : <Footer />}
+
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/portfolio" element={<Portfolio />} />
                     <Route path="/gallery" element={<Gallery />} />
                     <Route path="/contact" element={<Contact />} />
                 </Routes>
+                {isHome ? null : <Footer />}
             </CustomThemeProvider>
         </MuiThemeProvider>
     );

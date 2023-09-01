@@ -8,6 +8,9 @@ import homelogo from "../img/Ressources/logo/logo_index_blanc.svg";
 import logoLight from "../img/Ressources/logo/logoLight.svg";
 import logoDark from "../img/Ressources/logo/logoDark.svg";
 
+import ChangeLanguageButton from "./ChangeLanguageButton.jsx";
+import ChangeThemeButton from "./ChangeThemeButton.jsx";
+
 import { useTheme } from "@mui/material/styles";
 import SettingsMenu from "./SettingsMenu.jsx";
 
@@ -37,7 +40,7 @@ export default function Nav() {
     // Pour savoir si on est sur la page d'accueil, si oui alors on applique un certaint style
     const isHome = location.pathname === "/";
     // Styles pour la page d'accueil
-    const PropsHeader = {
+    const PropsHome = {
         width: "50vmax",
         height: "20vmax",
         display: "flex",
@@ -50,9 +53,10 @@ export default function Nav() {
     };
 
     // Styles pour les autres pages
-    const containerStyle = {
+    const PropsPages = {
         position: "sticky",
         top: "0",
+        paddingY: "1rem",
         zIndex: "10",
         backgroundColor: theme.palette.nav,
         ...(isBlurred && {
@@ -65,7 +69,7 @@ export default function Nav() {
             component="header"
             maxWidth={false}
             disableGutters={true}
-            sx={isHome ? PropsHeader : containerStyle}
+            sx={isHome ? PropsHome : PropsPages}
         >
             <Container maxWidth="logo" disableGutters={true}>
                 <Avatar
@@ -107,6 +111,10 @@ export default function Nav() {
                             : theme.palette.primary,
                         fontWeight: "bold",
                         fontFamily: "Poiret One, cursive",
+                        "&.active": {
+                            color: theme.palette.linkActive,
+                            textDecoration: "underline",
+                        },
                     }}
                 >
                     {t("portfolio.title")}
@@ -126,6 +134,10 @@ export default function Nav() {
 
                         fontWeight: "bold",
                         fontFamily: "Poiret One, cursive",
+                        "&.active": {
+                            color: theme.palette.linkActive,
+                            textDecoration: "underline",
+                        },
                     }}
                 >
                     {t("contact")}

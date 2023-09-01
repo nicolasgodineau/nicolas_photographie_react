@@ -8,6 +8,7 @@ import { useTheme } from "@mui/material/styles";
 import { Avatar, Box, Container, Typography } from "@mui/material";
 
 // Componentes & Pages & Autre
+import MainContainer from "../components/MainContainer.jsx";
 import ContactModal from "../components/ContactModal.jsx";
 import Nicolas from "../img/Ressources/Profil.webp";
 
@@ -17,20 +18,7 @@ export default function Contact() {
     const aboutText = t("contactText.intro", { returnObjects: true }) || [];
 
     return (
-        <Container
-            component="main"
-            maxWidth="lg"
-            sx={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-
-                alignItems: "center",
-                justifyContent: "space-between",
-                gap: "1rem",
-                padding: "2rem 0 3rem 0",
-            }}
-        >
+        <MainContainer>
             <Typography
                 variant="h1"
                 sx={{
@@ -105,6 +93,6 @@ export default function Contact() {
                 </Container>
             </Box>
             <ContactModal />
-        </Container>
+        </MainContainer>
     );
 }

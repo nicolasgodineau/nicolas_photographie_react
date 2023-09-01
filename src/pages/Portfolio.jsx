@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { Container, Grid } from "@mui/material";
 
 // Componentes & Pages & Autre
+import MainContainer from "../components/MainContainer.jsx";
 import CardPortfolio from "../components/CardPortfolio.jsx";
 
 export default function Portfolio() {
@@ -15,16 +16,7 @@ export default function Portfolio() {
     const portfolioCards = t("portfolio.cards", { returnObjects: true }) || [];
 
     return (
-        <Container
-            component="main"
-            maxWidth="lg"
-            sx={{
-                height: "calc(100vh - 40vh)",
-                display: "flex",
-                alignItems: "center",
-                backgroundColor: "primary",
-            }}
-        >
+        <MainContainer>
             <Container
                 component="section"
                 maxWidth={false}
@@ -50,6 +42,6 @@ export default function Portfolio() {
                     ))}
                 </Grid>
             </Container>
-        </Container>
+        </MainContainer>
     );
 }

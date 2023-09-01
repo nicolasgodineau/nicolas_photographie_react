@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Airform from "react-airform";
 import { Button, Modal, Box, Typography, TextField } from "@mui/material";
 
 import { useTheme } from "@mui/material/styles";
@@ -15,20 +16,55 @@ export default function ContactModal() {
         setOpen(false);
     };
 
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        message: "",
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Ajoutez ici la logique d'envoi de l'e-mail avec Elastic Email
-        // Utilisez les valeurs des champs du formulaire pour construire le message
-        // Par exemple : fetch('votre-endpoint-api', { method: 'POST', body: formData })
+        // Envoyer les données du formulaire à Getform ici
+        // Vous devrez remplacer "your-form-id" par l'ID de votre formulaire Getform
+        const formId = "your-form-id";
+        const apiUrl = `https://getform.io/f/${formId}`;
+
+        fetch(apiUrl, {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                // Traitez la réponse ou affichez un message de confirmation ici
+                console.log("Réponse de Getform :", data);
+            })
+            .catch((error) => {
+                // Gérez les erreurs ici
+                console.error(
+                    "Erreur lors de l'envoi du formulaire à Getform :",
+                    error
+                );
+            });
         handleClose();
     };
 
     return (
-        <Box>
+        <Box sx={{ alignSelf: "center" }}>
             <Button
                 variant="contained"
                 size="large"
-                sx={{ width: "20vmax", minWidth: "300px" }}
+                sx={{ width: "20vmax", minWidth: "300px", alignSelf: "center" }}
                 onClick={handleOpen}
             >
                 Ecrivez moi 👋🏻👋🏻👋🏻
@@ -59,33 +95,35 @@ export default function ContactModal() {
                     }}
                 >
                     <Typography variant="h6">Formulaire de Contact</Typography>
-                    <Box
-                        component="form"
+                    <form
+                        action="https://getform.io/f/e89cd7de-e3a1-4f9f-9350-e60a3fe35468" // Remplacez par l'URL unique de votre formulaire Getform
+                        method="POST"
                         onSubmit={handleSubmit}
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "16px",
-                        }}
                     >
                         <TextField
-                            label="Nom et prénom"
-                            variant="outlined"
-                            required
+                            name="name"
+                            label="Nom"
+                            value={formData.name}
+                            onChange={handleChange}
+                            fullWidth
                         />
                         <TextField
-                            label="Adresse e-mail"
-                            variant="outlined"
-                            required
-                            type="email"
+                            name="email"
+                            label="Email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            fullWidth
                         />
                         <TextField
+                            name="message"
                             label="Message"
-                            variant="outlined"
                             multiline
                             rows={4}
-                            required
+                            value={formData.message}
+                            onChange={handleChange}
+                            fullWidth
                         />
+                        <TextField name="_gotcha" />
                         <Button
                             type="submit"
                             variant="contained"
@@ -93,7 +131,7 @@ export default function ContactModal() {
                         >
                             Envoyer
                         </Button>
-                    </Box>
+                    </form>
                 </Box>
             </Modal>
         </Box>
