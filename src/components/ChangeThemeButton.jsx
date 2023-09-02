@@ -1,17 +1,12 @@
 // ChangeThemeButton.js
-import React, { useState } from "react";
-import { Button, Switch } from "@mui/material";
+import React from "react";
+import { Switch } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useTheme } from "../themeContext.js";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { useTheme } from "@mui/material/styles";
 
-export default function ChangeThemeButton() {
-    const { mode, setMode } = useTheme();
+export default function ChangeThemeButton({ toggleTheme }) {
+    const theme = useTheme();
 
-    const toggleTheme = () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-    };
     const MaterialUISwitch = styled(Switch)(({ theme }) => ({
         width: 62,
         height: 34,
@@ -64,7 +59,7 @@ export default function ChangeThemeButton() {
     return (
         <>
             <MaterialUISwitch
-                checked={mode === "dark"}
+                checked={theme.palette.mode === "dark"}
                 onChange={toggleTheme}
             />
         </>

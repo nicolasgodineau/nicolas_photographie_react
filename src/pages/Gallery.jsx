@@ -3,14 +3,14 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 
 // CSS & MUI
-import { Container, ImageList, Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 // Componentes & Pages & Autre
 import MainContainer from "../components/MainContainer.jsx";
 import Fancybox from "../components/Fancybox.jsx";
 
-function Gallery() {
+export default function Gallery() {
     const location = useLocation("/portfolio");
     const theme = useTheme();
     const { folder, num } = location.state;
@@ -39,10 +39,14 @@ function Gallery() {
             >
                 {folder}
             </Typography>
-            <ImageList
-                cols={4}
+            <Box
                 sx={{
-                    gap: "2vmax !important",
+                    width: "100%",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    gap: "3svw",
+                    padding: "0",
                 }}
             >
                 {images.map((image, index) => (
@@ -52,9 +56,7 @@ function Gallery() {
                         alt={`Collage ${index + 1}`}
                     />
                 ))}
-            </ImageList>
+            </Box>
         </MainContainer>
     );
 }
-
-export default Gallery;

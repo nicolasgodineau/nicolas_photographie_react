@@ -53,6 +53,8 @@ export default function CardPortfolio({ title, srcImg, folder, numImg }) {
                     paddingY: ".5rem",
                     boxShadow: 4,
                     textTransform: "uppercase",
+                    fontFamily: "Poiret One",
+                    fontWeight: "700",
                     color:
                         theme.palette.mode === "light"
                             ? theme.palette.common.white

@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
-
+import { useTheme } from "@mui/material/styles";
 import { Container } from "@mui/material";
 
 export default function CustomArticleContainer({ children }) {
+    const theme = useTheme();
     return (
         <Container
             component="main"
@@ -15,6 +16,9 @@ export default function CustomArticleContainer({ children }) {
                 justifyContent: "space-between",
                 gap: "1rem",
                 paddingY: "1rem",
+                [theme.breakpoints.down("sm")]: {
+                    padding: "0.5rem 0 3rem 0",
+                },
             }}
         >
             {children}

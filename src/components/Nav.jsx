@@ -8,13 +8,10 @@ import homelogo from "../img/Ressources/logo/logo_index_blanc.svg";
 import logoLight from "../img/Ressources/logo/logoLight.svg";
 import logoDark from "../img/Ressources/logo/logoDark.svg";
 
-import ChangeLanguageButton from "./ChangeLanguageButton.jsx";
-import ChangeThemeButton from "./ChangeThemeButton.jsx";
-
 import { useTheme } from "@mui/material/styles";
 import SettingsMenu from "./SettingsMenu.jsx";
 
-export default function Nav() {
+export default function Nav({ toggleTheme }) {
     const { t } = useTranslation();
     const theme = useTheme();
     const location = useLocation();
@@ -62,6 +59,9 @@ export default function Nav() {
         ...(isBlurred && {
             backdropFilter: "blur(20px) saturate(0)",
         }),
+        [theme.breakpoints.down("sm")]: {
+            paddingBottom: "0rem",
+        },
     };
 
     return (
@@ -71,9 +71,18 @@ export default function Nav() {
             disableGutters={true}
             sx={isHome ? PropsHome : PropsPages}
         >
-            <Container maxWidth="logo" disableGutters={true}>
+            <Container
+                maxWidth="logo"
+                disableGutters={true}
+                sx={{
+                    [theme.breakpoints.down("sm")]: {
+                        width: "250px",
+                    },
+                }}
+            >
                 <Avatar
                     variant="square"
+                    alt="Logo Nicolas Godineau Photographie"
                     src={
                         isHome
                             ? homelogo
@@ -97,6 +106,10 @@ export default function Nav() {
                     alignItems: "center",
                     justifyContent: isHome ? "space-evenly" : "space-between",
                     paddingY: "1rem",
+                    [theme.breakpoints.down("sm")]: {
+                        paddingBottom: "0rem",
+                        justifyContent: "space-evenly",
+                    },
                 }}
             >
                 <Link
@@ -119,7 +132,7 @@ export default function Nav() {
                 >
                     {t("portfolio.title")}
                 </Link>
-                {isHome ? null : <SettingsMenu />}
+                {isHome ? null : <SettingsMenu toggleTheme={toggleTheme} />}
 
                 <Link
                     rel="noopener noreferrer"

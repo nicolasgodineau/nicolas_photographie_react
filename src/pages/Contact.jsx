@@ -32,7 +32,9 @@ export default function Contact() {
             >
                 {t("contact")}
             </Typography>
-            <Box
+            <Container
+                maxWidth={false}
+                disableGutters={false}
                 sx={{
                     width: "100%",
                     display: "flex",
@@ -40,16 +42,21 @@ export default function Contact() {
                     flexWrap: "wrap",
                     justifyContent: "space-evenly",
                     gap: "1rem",
-                    padding: "0",
                     marginY: "1rem",
                 }}
             >
                 <Avatar
                     variant="square"
                     src={Nicolas}
+                    alt="Nicolas"
                     sx={{
                         height: "380px",
                         width: "380px",
+                        [theme.breakpoints.down("sm")]: {
+                            maxWidth: "280px",
+                            height: "fit-content",
+                            width: "fit-content",
+                        },
                     }}
                 />
                 <Container
@@ -68,11 +75,13 @@ export default function Contact() {
                 >
                     {aboutText.map((text, index) => (
                         <Typography
+                            component="p"
                             variant={
-                                index === aboutText.length - 1 ? "h5" : "body1"
+                                index === aboutText.length - 1 ? "h4" : "h6"
                             }
                             key={index}
                             sx={{
+                                fontFamily: "Poiret One",
                                 paddingX:
                                     index === aboutText.length - 1
                                         ? "1rem"
@@ -91,7 +100,7 @@ export default function Contact() {
                         </Typography>
                     ))}
                 </Container>
-            </Box>
+            </Container>
             <ContactModal />
         </MainContainer>
     );
