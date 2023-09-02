@@ -10,6 +10,7 @@ export const lightPalette = {
     },
     background: {
         default: grey[50],
+        transparent: "#fafafa7a",
     },
     accent: grey[900],
     nav: "#fafafa7a",
@@ -24,7 +25,8 @@ export const darkPalette = {
         main: grey[900],
     },
     background: {
-        /*  */ default: grey[900],
+        default: grey[900],
+        transparent: "#2121217a",
     },
     accent: grey[50],
     nav: "#2121217a",
