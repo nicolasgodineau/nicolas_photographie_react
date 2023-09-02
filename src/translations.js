@@ -27,6 +27,17 @@ i18n.use(initReactI18next).init({
                 paragraph4:
                     "Feel free to contact me to discuss potential collaborations!",
                 contactText: {
+                    field: {
+                        title: "Write to me!",
+                        nameAndLastName: "Your first and last name",
+                        email: "Your email",
+                        text: "Your message",
+                        required: "Required field",
+                        invalidEmail: "Invalid email address",
+                        sendSucces: "Your message has been sent !",
+                        submit: "Send",
+                        close: "Close",
+                    },
                     intro: [
                         {
                             element: "Né à Bordeaux en France.",
@@ -102,6 +113,17 @@ i18n.use(initReactI18next).init({
                 paragraph4:
                     "N’hésitez pas à me contacter pour discuter d’une éventuelle collaboration !",
                 contactText: {
+                    field: {
+                        title: "Écrivez-moi !",
+                        nameAndLastName: "Votre prénom et nom de famille",
+                        email: "Votre adresse e-mail",
+                        text: "Votre message",
+                        required: "Champ requis",
+                        invalidEmail: "Adresse e-mail invalide",
+                        sendSucces: "Votre message a été envoyé !",
+                        submit: "Envoyer",
+                        close: "Fermer",
+                    },
                     intro: [
                         {
                             element: "Né à Bordeaux en France.",

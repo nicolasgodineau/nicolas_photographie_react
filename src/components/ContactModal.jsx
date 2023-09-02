@@ -1,11 +1,25 @@
-import React, { useState } from "react";
-import Airform from "react-airform";
-import { Button, Modal, Box, Typography, TextField } from "@mui/material";
+import React, { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { useForm, Controller } from "react-hook-form";
+import Confetti from "react-dom-confetti";
+import {
+    Button,
+    Modal,
+    Box,
+    Typography,
+    TextField,
+    FormControl,
+    IconButton,
+} from "@mui/material";
 
 import { useTheme } from "@mui/material/styles";
 
 export default function ContactModal() {
+    const { t } = useTranslation();
     const [open, setOpen] = useState(false);
+    const [isConfettiActive, setConfettiActive] = useState(false);
+    const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
     const theme = useTheme();
 
     const handleOpen = () => {
@@ -16,48 +30,76 @@ export default function ContactModal() {
         setOpen(false);
     };
 
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        message: "",
+    const validate = (values) => {
+        const errors = {};
+        const requiredFields = ["name", "email", "message"];
+        requiredFields.forEach((field) => {
+            if (!values[field]) {
+                errors[field] = "Required";
+            }
+        });
+        if (
+            values.email &&
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+        ) {
+            errors.email = "Invalid email address";
+        }
+        return errors;
+    };
+
+    const {
+        handleSubmit,
+        control,
+        reset,
+        formState: { errors },
+    } = useForm({ validate });
+
+    const onSubmit = (data) => {
+        const formData = new FormData();
+        Object.keys(data).forEach((key) => {
+            formData.append(key, data[key]);
+        });
+
+        fetch(
+            "https://public.herotofu.com/v1/9afc0bf0-2061-11ee-8025-97a9fb2f29da",
+            {
+                method: "POST",
+                body: formData,
+            }
+        ).catch((error) => {
+            console.log("error:", error);
+        });
+        setIsFormSubmitted(true); // Met à jour l'état pour indiquer que le formulaire a été soumis
+        reset(); // Réinitialise les valeurs du formulaire à leurs valeurs par défaut
+        setConfettiActive(true);
+
+        // Réinitialiser l'animation après une courte durée
+        setTimeout(() => {
+            setConfettiActive(false);
+            handleClose(); // Fermer la modal
+        }, 2000); // Durée en millisecondes de l'animation de confettis puis ferme la modale
+    };
+
+    // Fonction pour mettre à jour les dimensions de l'élément cible
+    const [elementDimensions, setElementDimensions] = useState({
+        width: 281, // Valeur par défaut de la largeur
+        height: 426, // Valeur par défaut de la hauteur
     });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
+    const targetElementRef = useRef(null);
+
+    const updateDimensions = () => {
+        if (targetElementRef.current) {
+            const { width, height } =
+                targetElementRef.current.getBoundingClientRect();
+            setElementDimensions({ width, height });
+        }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Envoyer les données du formulaire à Getform ici
-        // Vous devrez remplacer "your-form-id" par l'ID de votre formulaire Getform
-        const formId = "your-form-id";
-        const apiUrl = `https://getform.io/f/${formId}`;
-
-        fetch(apiUrl, {
-            method: "POST",
-            body: JSON.stringify(formData),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                // Traitez la réponse ou affichez un message de confirmation ici
-                console.log("Réponse de Getform :", data);
-            })
-            .catch((error) => {
-                // Gérez les erreurs ici
-                console.error(
-                    "Erreur lors de l'envoi du formulaire à Getform :",
-                    error
-                );
-            });
-        handleClose();
-    };
+    // Appele la fonction updateDimensions lorsque le composant est monté
+    useEffect(() => {
+        updateDimensions();
+    }, []);
 
     return (
         <Box sx={{ alignSelf: "center" }}>
@@ -67,7 +109,7 @@ export default function ContactModal() {
                 sx={{ width: "20vmax", minWidth: "300px", alignSelf: "center" }}
                 onClick={handleOpen}
             >
-                Ecrivez moi 👋🏻👋🏻👋🏻
+                {t("contactText.field.title")} 👋🏻👋🏻👋🏻
             </Button>
             <Modal
                 open={open}
@@ -77,61 +119,176 @@ export default function ContactModal() {
                     alignItems: "center",
                     justifyContent: "center",
                     backdropFilter: "blur(20px)",
-                    backgroundColor: theme.palette.nav,
+                    backgroundColor: theme.palette.background.transparent,
                     padding: "2rem",
+                    [theme.breakpoints.down("sm")]: {
+                        padding: "1rem",
+                    },
                 }}
             >
                 <Box
                     sx={{
+                        width: "400px",
                         display: "flex",
                         flexDirection: "column",
                         gap: "1rem",
-                        backgroundColor: (theme) =>
-                            theme.palette.background.paper,
-                        border: "2px solid #000",
-                        boxShadow: (theme) => theme.shadows[5],
-                        padding: (theme) => theme.spacing(2, 4, 3),
-                        width: "400px",
+                        backgroundColor: theme.palette.background.default,
+                        border: `2px solid ${theme.palette.primary.main}`,
+                        boxShadow: theme.shadows[5],
                     }}
                 >
-                    <Typography variant="h6">Formulaire de Contact</Typography>
-                    <form
-                        action="https://getform.io/f/e89cd7de-e3a1-4f9f-9350-e60a3fe35468" // Remplacez par l'URL unique de votre formulaire Getform
-                        method="POST"
-                        onSubmit={handleSubmit}
+                    <FormControl
+                        open={open}
+                        onClose={() => setOpen(false)}
+                        component="form"
+                        onSubmit={handleSubmit(onSubmit)}
                     >
-                        <TextField
-                            name="name"
-                            label="Nom"
-                            value={formData.name}
-                            onChange={handleChange}
-                            fullWidth
-                        />
-                        <TextField
-                            name="email"
-                            label="Email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            fullWidth
-                        />
-                        <TextField
-                            name="message"
-                            label="Message"
-                            multiline
-                            rows={4}
-                            value={formData.message}
-                            onChange={handleChange}
-                            fullWidth
-                        />
-                        <TextField name="_gotcha" />
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            color="primary"
-                        >
-                            Envoyer
-                        </Button>
-                    </form>
+                        {isFormSubmitted ? (
+                            <Box
+                                ref={targetElementRef}
+                                sx={{
+                                    width: `${elementDimensions.width}px`,
+                                    height: `${elementDimensions.height}px`,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-evenly",
+                                    flexDirection: "column",
+                                    padding: "1rem",
+                                }}
+                            >
+                                <Typography
+                                    variant="h6"
+                                    color={theme.palette.primary.main}
+                                >
+                                    {t("contactText.field.sendSucces")}
+                                </Typography>
+                            </Box>
+                        ) : (
+                            <Box
+                                ref={targetElementRef}
+                                sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-evenly",
+                                    flexDirection: "column",
+                                    gap: 2,
+                                    padding: "1rem",
+                                    [theme.breakpoints.down("md")]: {
+                                        // Styles pour les écrans de largeur maximale "md" (1090px)
+                                        height: "100%",
+                                    },
+                                }}
+                            >
+                                <Typography variant="h6">
+                                    {t("contactText.field.title")}
+                                </Typography>
+                                <Controller
+                                    name="name"
+                                    control={control}
+                                    defaultValue=""
+                                    rules={{
+                                        required: t(
+                                            "contactText.field.required"
+                                        ),
+                                    }}
+                                    render={({ field }) => (
+                                        <TextField
+                                            label={t(
+                                                "contactText.field.nameAndLastName"
+                                            )}
+                                            variant="filled"
+                                            fullWidth
+                                            margin="normal"
+                                            error={Boolean(errors.name)}
+                                            helperText={
+                                                errors.name &&
+                                                errors.name.message
+                                            }
+                                            {...field}
+                                        />
+                                    )}
+                                />
+                                <Controller
+                                    name="email"
+                                    control={control}
+                                    defaultValue=""
+                                    rules={{
+                                        required: t(
+                                            "contactText.field.required"
+                                        ),
+                                        pattern: {
+                                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                            message: t(
+                                                "contactText.field.invalideEmail"
+                                            ),
+                                        },
+                                    }}
+                                    render={({ field }) => (
+                                        <TextField
+                                            label="Email"
+                                            variant="filled"
+                                            fullWidth
+                                            margin="normal"
+                                            error={Boolean(errors.email)}
+                                            helperText={
+                                                errors.email &&
+                                                errors.email.message
+                                            }
+                                            {...field}
+                                        />
+                                    )}
+                                />
+                                <Controller
+                                    name="message"
+                                    control={control}
+                                    defaultValue=""
+                                    rules={{
+                                        required: t(
+                                            "contactText.field.required"
+                                        ),
+                                    }}
+                                    render={({ field }) => (
+                                        <TextField
+                                            label="Message"
+                                            variant="filled"
+                                            fullWidth
+                                            margin="normal"
+                                            multiline
+                                            rows={4}
+                                            error={Boolean(errors.message)}
+                                            helperText={
+                                                errors.message &&
+                                                errors.message.message
+                                            }
+                                            {...field}
+                                        />
+                                    )}
+                                />
+                                <Button
+                                    type="submit"
+                                    sx={{
+                                        width: "100%",
+                                        padding: "12px 44px",
+                                        borderRadius: 0,
+                                        backgroundColor:
+                                            theme.palette.primary.main,
+                                        border: `2px solid ${theme.palette.primary.main}`,
+                                        color: theme.palette.secondary.main,
+                                        ":hover": {
+                                            cursor: "pointer",
+                                            color: theme.palette.primary.main,
+                                            backgroundColor:
+                                                theme.palette.secondary.main,
+                                        },
+                                    }}
+                                    variant="text"
+                                >
+                                    {t("contactText.field.submit")}
+                                </Button>
+                            </Box>
+                        )}
+                        <Confetti active={isConfettiActive} />
+                    </FormControl>
                 </Box>
             </Modal>
         </Box>
