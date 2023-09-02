@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Box, Avatar, Link } from "@mui/material";
-import { shadows } from "@mui/system";
 import { useTheme } from "@mui/material/styles";
 
 export default function CardPortfolio({ title, srcImg, folder, numImg }) {
@@ -14,6 +13,10 @@ export default function CardPortfolio({ title, srcImg, folder, numImg }) {
                 display: "flex",
                 flexDirection: "column",
                 gap: "2rem",
+                [theme.breakpoints.down("sm")]: {
+                    paddingX: "1rem",
+                    gap: "1rem",
+                },
             }}
         >
             <Box>

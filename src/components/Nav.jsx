@@ -20,7 +20,7 @@ export default function Nav({ toggleTheme }) {
     // Permet d'activer le blur du menu au scroll
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 20) {
+            if (window.scrollY > 32) {
                 setIsBlurred(true);
             } else {
                 setIsBlurred(false);

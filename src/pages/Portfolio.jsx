@@ -4,6 +4,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 // CSS & MUI
+import { useTheme } from "@mui/material/styles";
 import { Container, Grid } from "@mui/material";
 
 // Componentes & Pages & Autre
@@ -12,6 +13,7 @@ import CardPortfolio from "../components/CardPortfolio.jsx";
 
 export default function Portfolio() {
     const { t } = useTranslation();
+    const theme = useTheme();
 
     const portfolioCards = t("portfolio.cards", { returnObjects: true }) || [];
 
@@ -19,19 +21,31 @@ export default function Portfolio() {
         <MainContainer>
             <Container
                 component="section"
-                maxWidth={false}
-                disableGutters={true}
+                maxWidth="lg"
+                disableGutters={false}
                 sx={{
                     width: "100%",
                     display: "flex",
                     justifyContent: "space-between",
                     gap: "1rem",
-                    padding: "0",
+                    padding: "8vmin 0 0",
+                    [theme.breakpoints.down("sm")]: {
+                        padding: "0",
+                        gap: "2rem",
+                    },
                 }}
             >
-                <Grid container spacing={2}>
+                <Grid
+                    container
+                    spacing={2}
+                    sx={{
+                        [theme.breakpoints.down("sm")]: {
+                            gap: "2rem",
+                        },
+                    }}
+                >
                     {portfolioCards.map((card, index) => (
-                        <Grid item key={index} xs={12} sm={6} md={3}>
+                        <Grid item key={index} xs={10} sm={6} md={3}>
                             <CardPortfolio
                                 title={card.title}
                                 srcImg={card.imgSrc}

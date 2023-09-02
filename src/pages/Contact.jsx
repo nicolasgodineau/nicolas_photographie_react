@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 // CSS & MUI
 import { useTheme } from "@mui/material/styles";
-import { Avatar, Box, Container, Typography } from "@mui/material";
+import { Avatar, Container, Typography } from "@mui/material";
 
 // Componentes & Pages & Autre
 import MainContainer from "../components/MainContainer.jsx";

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, ButtonGroup, IconButton } from "@mui/material";
+import { ButtonGroup } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ChangeLanguageButton from "./ChangeLanguageButton.jsx";
 import ChangeThemeButton from "./ChangeThemeButton.jsx";

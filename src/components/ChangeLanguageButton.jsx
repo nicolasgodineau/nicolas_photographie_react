@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, Button, Switch, IconButton, Box } from "@mui/material";
-import { shadows } from "@mui/system";
+import { IconButton, Box } from "@mui/material";
 
 import { useTheme } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
