@@ -20,7 +20,7 @@ export default function Nav({ toggleTheme }) {
     // Permet d'activer le blur du menu au scroll
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 1) {
+            if (window.scrollY > 20) {
                 setIsBlurred(true);
             } else {
                 setIsBlurred(false);
@@ -44,7 +44,6 @@ export default function Nav({ toggleTheme }) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "space-evenly",
-        paddingY: "2rem",
         backdropFilter: "blur(20px)",
         backgroundColor: theme.palette.nav,
     };
@@ -53,11 +52,11 @@ export default function Nav({ toggleTheme }) {
     const PropsPages = {
         position: "sticky",
         top: "0",
-        paddingY: "1rem",
         zIndex: "10",
         backgroundColor: theme.palette.nav,
         ...(isBlurred && {
             backdropFilter: "blur(20px) saturate(0)",
+            borderBottom: `2px solid ${theme.palette.primary.main}`,
         }),
         [theme.breakpoints.down("sm")]: {
             paddingBottom: "0rem",
@@ -75,6 +74,7 @@ export default function Nav({ toggleTheme }) {
                 maxWidth="logo"
                 disableGutters={true}
                 sx={{
+                    paddingY: "1rem",
                     [theme.breakpoints.down("sm")]: {
                         width: "250px",
                     },
@@ -105,7 +105,7 @@ export default function Nav({ toggleTheme }) {
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: isHome ? "space-evenly" : "space-between",
-                    paddingY: "1rem",
+                    paddingY: ".3rem",
                     [theme.breakpoints.down("sm")]: {
                         paddingBottom: "0rem",
                         justifyContent: "space-evenly",
