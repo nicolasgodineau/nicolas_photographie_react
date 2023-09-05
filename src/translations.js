@@ -6,27 +6,17 @@ i18n.use(initReactI18next).init({
     resources: {
         en: {
             translation: {
-                hello: "Hello",
                 home: "Home",
                 about: "About",
                 welcome: "Welcome!",
-                contact: "Contact",
                 portrait: "Portraits",
                 mariage: "Weddings",
                 paysage: "Landscapes",
                 immobilier: "Real Estate",
-                nom_prenom: "Your name and surname",
-                email: "Your email",
-                message: "Your message",
-                send: "Send",
-                paragraph1: "Born in Bordeaux, France,",
-                paragraph2:
-                    "I spent my childhood surrounded by the sound of my father's camera shutter.",
-                paragraph3:
-                    "It was at the age of 20, with my first camera, that I discovered a passion for photography. Today, I share my photographs with you, fragments of emotions and reflections of who I am and what I love.",
-                paragraph4:
-                    "Feel free to contact me to discuss potential collaborations!",
-                contactText: {
+                changeLanguage: "Change language",
+                changeMode: "Change mode",
+                contact: {
+                    title: "Contact",
                     field: {
                         title: "Write to me!",
                         nameAndLastName: "Your first and last name",
@@ -40,19 +30,19 @@ i18n.use(initReactI18next).init({
                     },
                     intro: [
                         {
-                            element: "Né à Bordeaux en France.",
+                            element: "Born in Bordeaux, France.",
                         },
                         {
                             element:
-                                "j’ai passé mon enfance bercé par le bruit des déclenchements d’appareil photo de mon père.",
+                                "I spent my childhood surrounded by the sound of my father's camera shutter.",
                         },
                         {
                             element:
-                                "C’est à l’âge de 20 ans et avec mon premier appareil photo que je me suis découvert une passion pour la photographie. Aujourd’hui, je partage mes photographies avec vous, fragments d’émotions et reflet de ce que je suis, de ce que j’aime.",
+                                "It was at the age of 20, with my first camera, that I discovered a passion for photography. Today, I share my photographs with you, fragments of emotions and reflections of who I am and what I love.",
                         },
                         {
                             element:
-                                "N’hésitez pas à me contacter pour discuter ensemble d’une potentielle collaboration !",
+                                "Feel free to contact me to discuss potential collaborations!",
                         },
                         {
                             element: "Nicolas",
@@ -92,27 +82,17 @@ i18n.use(initReactI18next).init({
         },
         fr: {
             translation: {
-                hello: "Bonjour",
                 home: "Accueil",
                 about: "À propos",
                 welcome: "Bienvenue !",
-                contact: "Contact",
                 portrait: "Portraits",
                 mariage: "Mariages",
                 paysage: "Paysages",
                 immobilier: "Immobilier",
-                nom_prenom: "Votre nom et prénom",
-                email: "Votre email",
-                message: "Votre message",
-                send: "Envoyer",
-                paragraph1: "Né à Bordeaux en France,",
-                paragraph2:
-                    "j’ai passé mon enfance bercé par le bruit des déclenchements d’appareil photo de mon père.",
-                paragraph3:
-                    "C’est à l’âge de 20 ans, avec mon premier appareil photo, que j’ai découvert ma passion pour la photographie. Aujourd’hui, je partage mes photographies avec vous, fragments d’émotions et reflets de ce que je suis et de ce que j’aime.",
-                paragraph4:
-                    "N’hésitez pas à me contacter pour discuter d’une éventuelle collaboration !",
-                contactText: {
+                changeLanguage: "Changer de langue",
+                changeMode: "Change le mode",
+                contact: {
+                    title: "Contact",
                     field: {
                         title: "Écrivez-moi !",
                         nameAndLastName: "Votre prénom et nom de famille",

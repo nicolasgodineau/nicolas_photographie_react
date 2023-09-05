@@ -1,15 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { Container, Avatar, Link } from "@mui/material";
+import {
+    Container,
+    Avatar,
+    AppBar,
+    Toolbar,
+    Box,
+    Divider,
+    Drawer,
+    IconButton,
+} from "@mui/material";
 
-import homelogo from "../img/Ressources/logo/logo_index_blanc.svg";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
+
 import logoLight from "../img/Ressources/logo/logoLight.svg";
 import logoDark from "../img/Ressources/logo/logoDark.svg";
+import MenuIcon from "@mui/icons-material/Menu";
 
 import { useTheme } from "@mui/material/styles";
 import SettingsMenu from "./SettingsMenu.jsx";
+import ButtonNavLink from "./ButtonNavLink.jsx";
+import ChangeLanguageButton from "./ChangeLanguageButton.jsx";
+import ChangeThemeButton from "./ChangeThemeButton.jsx";
 
 export default function Nav({ toggleTheme }) {
     const { t } = useTranslation();
@@ -17,10 +31,16 @@ export default function Nav({ toggleTheme }) {
     const location = useLocation();
     const [isBlurred, setIsBlurred] = useState(false);
 
+    // Permet l'apparition de la bordure du menu quand on scrool
+    const trigger = useScrollTrigger({
+        disableHysteresis: true,
+        threshold: 0,
+    });
+
     // Permet d'activer le blur du menu au scroll
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 32) {
+            if (window.scrollY > 0) {
                 setIsBlurred(true);
             } else {
                 setIsBlurred(false);
@@ -34,128 +54,171 @@ export default function Nav({ toggleTheme }) {
         };
     }, []);
 
-    // Pour savoir si on est sur la page d'accueil, si oui alors on applique un certaint style
-    const isHome = location.pathname === "/";
-    // Styles pour la page d'accueil
-    const PropsHome = {
-        width: "50vmax",
-        height: "20vmax",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "space-evenly",
-        backdropFilter: "blur(20px)",
-        backgroundColor: theme.palette.nav,
+    const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    const handleDrawerToggle = () => {
+        setMobileOpen((prevState) => !prevState);
     };
 
-    // Styles pour les autres pages
-    const PropsPages = {
-        position: "sticky",
-        top: "0",
-        zIndex: "10",
-        backgroundColor: theme.palette.nav,
-        ...(isBlurred && {
-            backdropFilter: "blur(20px) saturate(0)",
-            borderBottom: `2px solid ${theme.palette.primary.main}`,
-        }),
-        [theme.breakpoints.down("sm")]: {
-            paddingBottom: "0rem",
-        },
-    };
+    // Est le logo
+    const avatar = (
+        <Avatar
+            variant="square"
+            alt="Logo Nicolas Godineau Photographie"
+            src={theme.palette.mode === "light" ? logoLight : logoDark}
+            sx={{
+                height: "100%",
+                width: "100%",
+            }}
+        />
+    );
 
-    return (
-        <Container
-            component="header"
-            maxWidth={false}
-            disableGutters={true}
-            sx={isHome ? PropsHome : PropsPages}
+    // Est le menu mobile
+    const drawer = (
+        <Box
+            onClick={handleDrawerToggle}
+            sx={{ textAlign: "center", backdropFilter: "blur(20px)" }}
         >
             <Container
-                maxWidth="logo"
-                disableGutters={true}
+                maxWidth="xxs"
                 sx={{
-                    paddingY: "1rem",
                     [theme.breakpoints.down("sm")]: {
-                        width: "250px",
-                    },
-                }}
-            >
-                <Avatar
-                    variant="square"
-                    alt="Logo Nicolas Godineau Photographie"
-                    src={
-                        isHome
-                            ? homelogo
-                            : theme.palette.mode === "light"
-                            ? logoLight
-                            : logoDark
-                    }
-                    sx={{
-                        height: "100%",
                         width: "100%",
-                    }}
-                />
-            </Container>
-            <Container
-                component="nav"
-                maxWidth="xs"
-                sx={{
-                    width: "100%",
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: isHome ? "space-evenly" : "space-between",
-                    paddingY: ".3rem",
-                    [theme.breakpoints.down("sm")]: {
-                        paddingBottom: "0rem",
-                        justifyContent: "space-evenly",
+                        padding: "1rem",
                     },
                 }}
             >
-                <Link
-                    rel="noopener noreferrer"
-                    underline="none"
-                    component={NavLink}
-                    to="/portfolio"
-                    variant="h5"
-                    sx={{
-                        color: isHome
-                            ? theme.palette.common.white
-                            : theme.palette.primary,
-                        fontWeight: "bold",
-                        fontFamily: "Poiret One, cursive",
-                        "&.active": {
-                            color: theme.palette.linkActive,
-                            textDecoration: "underline",
-                        },
-                    }}
-                >
-                    {t("portfolio.title")}
-                </Link>
-                {isHome ? null : <SettingsMenu toggleTheme={toggleTheme} />}
-
-                <Link
-                    rel="noopener noreferrer"
-                    underline="none"
-                    component={NavLink}
-                    to="/contact"
-                    variant="h5"
-                    sx={{
-                        color: isHome
-                            ? theme.palette.common.white
-                            : theme.palette.primary,
-
-                        fontWeight: "bold",
-                        fontFamily: "Poiret One, cursive",
-                        "&.active": {
-                            color: theme.palette.linkActive,
-                            textDecoration: "underline",
-                        },
-                    }}
-                >
-                    {t("contact")}
-                </Link>
+                {avatar}
             </Container>
-        </Container>
+            <Divider />
+            <Container
+                maxWidth="xxs"
+                sx={{
+                    height: "100%",
+                    minHeight: "35svh",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-evenly",
+                }}
+            >
+                <ButtonNavLink to="portfolio" variantText="h4" />
+                <ButtonNavLink to="contact" variantText="h4" />
+                <Box
+                    sx={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                    }}
+                >
+                    <ChangeLanguageButton />
+                    <ChangeThemeButton toggleTheme={toggleTheme} />
+                </Box>
+            </Container>
+        </Box>
+    );
+
+    return (
+        <>
+            <AppBar
+                component="header"
+                elevation={trigger ? 2 : 0}
+                sx={{
+                    position: "sticky",
+                    top: "0",
+                    zIndex: "10",
+                    display: "flex",
+                    flexDirection: "column",
+                    backgroundColor: theme.palette.background.default,
+                    ...(isBlurred && {
+                        backgroundColor: theme.palette.background.transparent,
+                        backdropFilter: "blur(20px) saturate(0)",
+                    }),
+                }}
+            >
+                <Toolbar
+                    component="nav"
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: ".5rem",
+                    }}
+                >
+                    {/* Logo */}
+                    <Container
+                        maxWidth="xxs"
+                        disableGutters
+                        sx={{
+                            paddingTop: "1rem",
+                            [theme.breakpoints.down("sm")]: {
+                                width: "100%",
+                                padding: "1rem",
+                            },
+                        }}
+                    >
+                        {avatar}
+                    </Container>
+                    {/* Menu */}
+                    <Container
+                        maxWidth="xs"
+                        disableGutters
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            [theme.breakpoints.down("sm")]: {
+                                display: "none",
+                            },
+                            [theme.breakpoints.down("xxs")]: {
+                                display: "none",
+                            },
+                        }}
+                    >
+                        <ButtonNavLink to="portfolio" variantText="h5" />
+                        <SettingsMenu toggleTheme={toggleTheme} />
+                        <ButtonNavLink to="contact" variantText="h5" />
+                    </Container>
+                </Toolbar>
+                <IconButton
+                    color="primary"
+                    aria-label="open drawer"
+                    edge="start"
+                    onClick={handleDrawerToggle}
+                    sx={{
+                        display: "none",
+                        width: "min-content",
+                        alignSelf: "center",
+                        margin: "0",
+                        [theme.breakpoints.down("sm")]: {
+                            display: "flex",
+                        },
+                    }}
+                >
+                    <MenuIcon />
+                </IconButton>
+            </AppBar>
+            <Drawer
+                variant="temporary"
+                anchor="top"
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                ModalProps={{
+                    keepMounted: true,
+                }}
+                sx={{
+                    display: "none",
+                    [theme.breakpoints.down("sm")]: {
+                        display: "block",
+                        backdropFilter: "blur(20px) saturate(0)",
+                    },
+                    "& .MuiDrawer-paper": {
+                        boxSizing: "border-box",
+                        width: "100%",
+                        minHeight: "40%",
+                    },
+                }}
+            >
+                {drawer}
+            </Drawer>
+        </>
     );
 }

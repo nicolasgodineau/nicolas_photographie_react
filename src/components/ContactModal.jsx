@@ -15,11 +15,10 @@ import { useTheme } from "@mui/material/styles";
 
 export default function ContactModal() {
     const { t } = useTranslation();
+    const theme = useTheme();
     const [open, setOpen] = useState(false);
     const [isConfettiActive, setConfettiActive] = useState(false);
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-
-    const theme = useTheme();
 
     const handleOpen = () => {
         setOpen(true);
@@ -108,7 +107,7 @@ export default function ContactModal() {
                 sx={{ width: "20vmax", minWidth: "300px", alignSelf: "center" }}
                 onClick={handleOpen}
             >
-                {t("contactText.field.title")} 👋🏻👋🏻👋🏻
+                {t("contact.field.title")} 👋🏻👋🏻👋🏻
             </Button>
             <Modal
                 open={open}
@@ -159,7 +158,7 @@ export default function ContactModal() {
                                     variant="h6"
                                     color={theme.palette.primary.main}
                                 >
-                                    {t("contactText.field.sendSucces")}
+                                    {t("contact.field.sendSucces")}
                                 </Typography>
                             </Box>
                         ) : (
@@ -179,21 +178,19 @@ export default function ContactModal() {
                                 }}
                             >
                                 <Typography variant="h6">
-                                    {t("contactText.field.title")}
+                                    {t("contact.field.title")}
                                 </Typography>
                                 <Controller
                                     name="name"
                                     control={control}
                                     defaultValue=""
                                     rules={{
-                                        required: t(
-                                            "contactText.field.required"
-                                        ),
+                                        required: t("contact.field.required"),
                                     }}
                                     render={({ field }) => (
                                         <TextField
                                             label={t(
-                                                "contactText.field.nameAndLastName"
+                                                "contact.field.nameAndLastName"
                                             )}
                                             variant="filled"
                                             fullWidth
@@ -212,13 +209,11 @@ export default function ContactModal() {
                                     control={control}
                                     defaultValue=""
                                     rules={{
-                                        required: t(
-                                            "contactText.field.required"
-                                        ),
+                                        required: t("contact.field.required"),
                                         pattern: {
                                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                             message: t(
-                                                "contactText.field.invalideEmail"
+                                                "contact.field.invalideEmail"
                                             ),
                                         },
                                     }}
@@ -242,9 +237,7 @@ export default function ContactModal() {
                                     control={control}
                                     defaultValue=""
                                     rules={{
-                                        required: t(
-                                            "contactText.field.required"
-                                        ),
+                                        required: t("contact.field.required"),
                                     }}
                                     render={({ field }) => (
                                         <TextField
@@ -282,7 +275,7 @@ export default function ContactModal() {
                                     }}
                                     variant="text"
                                 >
-                                    {t("contactText.field.submit")}
+                                    {t("contact.field.submit")}
                                 </Button>
                             </Box>
                         )}

@@ -2,9 +2,9 @@
 
 body {
     height: 100svh;
+    width: 100%;
 }
-
-.fancybox__backdrop {
-    backdrop-filter: blur(10px);
-    background: rgba(24, 24, 27, 0.62);
+/* :root {
+    height: 100%;
 }
+ */

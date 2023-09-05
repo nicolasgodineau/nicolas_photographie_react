@@ -1,5 +1,6 @@
 import React from "react";
 import { useTheme } from "@mui/material/styles";
+// Componentes & Pages & Autre
 import { Container } from "@mui/material";
 
 export default function CustomArticleContainer({ children }) {
@@ -8,7 +9,6 @@ export default function CustomArticleContainer({ children }) {
         <Container
             component="main"
             maxWidth="lg"
-            disableGutters={false}
             sx={{
                 width: "100%",
                 display: "flex",
@@ -16,7 +16,7 @@ export default function CustomArticleContainer({ children }) {
                 justifyContent: "space-between",
                 gap: "1rem",
                 paddingY: "1rem",
-                marginY: "2rem",
+                marginBottom: "2rem",
                 [theme.breakpoints.down("sm")]: {
                     padding: "0.5rem 0 3rem 0",
                 },

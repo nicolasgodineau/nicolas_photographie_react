@@ -1,50 +1,80 @@
-import React, { useState, useEffect } from "react";
-import { ButtonGroup } from "@mui/material";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useTheme } from "@mui/material/styles";
+import { SpeedDial, SpeedDialAction } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ChangeLanguageButton from "./ChangeLanguageButton.jsx";
 import ChangeThemeButton from "./ChangeThemeButton.jsx";
-import CancelIcon from "@mui/icons-material/Cancel";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function SettingsMenu({ toggleTheme }) {
-    const [showSettings, setShowSettings] = useState(false);
-
-    const toggleSettings = () => {
-        setShowSettings(!showSettings);
-    };
-
-    useEffect(() => {
-        if (showSettings) {
-            const timer = setTimeout(() => {
-                setShowSettings(false);
-            }, 3000);
-
-            return () => {
-                clearTimeout(timer);
-            };
-        }
-    }, [showSettings]);
+    const { t } = useTranslation();
+    const theme = useTheme();
+    const [open, setOpen] = useState(false);
 
     const buttons = [
-        <ChangeLanguageButton />,
-        <CancelIcon onClick={toggleSettings} />,
-        <ChangeThemeButton toggleTheme={toggleTheme} />,
+        { icon: <ChangeLanguageButton />, name: t("changeLanguage") },
+        {
+            icon: <ChangeThemeButton toggleTheme={toggleTheme} />,
+            name: t("changeMode"),
+        },
     ];
 
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
-        <ButtonGroup
+        <SpeedDial
+            ariaLabel="SpeedDial change language and mode"
+            icon={
+                open ? (
+                    <CloseIcon /> // Icône de fermeture
+                ) : (
+                    <SettingsIcon /> // Icône d'ouverture
+                )
+            }
+            open={open}
+            onOpen={handleToggle}
+            onClose={handleClose}
+            direction="down"
             sx={{
-                height: "35px",
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                alignContent: "center",
-                justifyContent: "center",
-                gap: "1rem",
-                borderRadius: "0px",
-                cursor: "pointer",
+                position: "relative",
+                ".MuiSpeedDial-actions": {
+                    position: "absolute",
+                    paddingX: ".5rem",
+                    marginTop: "60px",
+                    paddingTop: "40px",
+                    top: "-56px",
+                    backgroundColor: open
+                        ? theme.palette.background.transparent
+                        : "unset",
+                    backdropFilter: open ? "blur(20px) saturate(0)" : "unset",
+                    zIndex: "1000",
+                },
+                ".MuiSpeedDial-root": {
+                    backgroundColor: "green",
+                },
+                ".MuiSpeedDial-fab": {
+                    minHeight: "30px",
+                    minWidth: "30px",
+                    height: "unset !important",
+                    width: "unset !important",
+                },
             }}
         >
-            {showSettings ? buttons : <SettingsIcon onClick={toggleSettings} />}
-        </ButtonGroup>
+            {buttons.map((button) => (
+                <SpeedDialAction
+                    key={button.name}
+                    icon={button.icon}
+                    tooltipTitle={button.name}
+                    onClick={handleClose}
+                />
+            ))}
+        </SpeedDial>
     );
 }

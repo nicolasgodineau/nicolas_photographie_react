@@ -1,38 +1,29 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Box, Avatar, Link } from "@mui/material";
+import { Box, Avatar, Link, Button, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 export default function CardPortfolio({ title, srcImg, folder, numImg }) {
     const theme = useTheme();
 
     return (
-        <Box
-            component="article"
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "2rem",
-                [theme.breakpoints.down("sm")]: {
-                    paddingX: "1rem",
-                    gap: "1rem",
-                },
-            }}
-        >
-            <Box>
-                <Link
-                    rel="noopener noreferrer"
-                    underline="none"
-                    component={NavLink}
-                    to="/gallery"
-                    state={{ folder: folder, num: numImg }}
-                    variant="h5"
-                    sx={{
-                        fontWeight: "bold",
-                        fontFamily: "Poiret One, cursive",
-                    }}
-                >
+        <>
+            <Link
+                rel="noopener noreferrer"
+                underline="none"
+                component={NavLink}
+                to="/gallery"
+                state={{ folder: folder, num: numImg }}
+                variant="h6"
+                sx={{}}
+            >
+                <Button>
                     <Avatar
+                        rel="noopener noreferrer"
+                        underline="none"
+                        component={NavLink}
+                        to="/gallery"
+                        state={{ folder: folder, num: numImg }}
                         variant="square"
                         src={require(`../img/Ressources/portfolio/${srcImg}.webp`)}
                         sx={{
@@ -41,31 +32,23 @@ export default function CardPortfolio({ title, srcImg, folder, numImg }) {
                             boxShadow: 4,
                         }}
                     />
-                </Link>
-            </Box>
-            <Link
-                rel="noopener noreferrer"
-                underline="none"
-                component={NavLink}
-                to="/gallery"
-                state={{ folder: folder, num: numImg }}
-                variant="h6"
-                sx={{
-                    backgroundColor: "accent",
-                    textAlign: "center",
-                    paddingY: ".5rem",
-                    boxShadow: 4,
-                    textTransform: "uppercase",
-                    fontFamily: "Poiret One",
-                    fontWeight: "700",
-                    color:
-                        theme.palette.mode === "light"
-                            ? theme.palette.common.white
-                            : theme.palette.common.black,
-                }}
-            >
-                {title}
-            </Link>
-        </Box>
+                </Button>
+                <Button
+                    color="ochre"
+                    variant="contained"
+                    sx={{
+                        width: "100%",
+                        paddingY: ".5rem",
+                        fontSize: "inherit",
+                        lineHeight: "initial",
+                        fontFamily: "Poiret One",
+                        fontWeight: "700 !important",
+                        borderRadius: "0",
+                    }}
+                >
+                    {title}
+                </Button>
+            </Link>{" "}
+        </>
     );
 }

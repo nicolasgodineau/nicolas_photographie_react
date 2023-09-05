@@ -5,7 +5,8 @@ import { useTranslation } from "react-i18next";
 
 // CSS & MUI
 import { useTheme } from "@mui/material/styles";
-import { Avatar, Container, Typography } from "@mui/material";
+import { Avatar, Container, Typography, Box } from "@mui/material";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
 
 // Componentes & Pages & Autre
 import MainContainer from "../components/MainContainer.jsx";
@@ -15,8 +16,8 @@ import Nicolas from "../img/Ressources/Profil.webp";
 export default function Contact() {
     const { t } = useTranslation();
     const theme = useTheme();
-    const aboutText = t("contactText.intro", { returnObjects: true }) || [];
-
+    const aboutText = t("contact.intro", { returnObjects: true }) || [];
+    const trigger = useScrollTrigger();
     return (
         <MainContainer>
             <Typography
@@ -30,7 +31,7 @@ export default function Contact() {
                             : theme.palette.secondary,
                 }}
             >
-                {t("contact")}
+                {t("contact.title")}
             </Typography>
             <Container
                 maxWidth={false}

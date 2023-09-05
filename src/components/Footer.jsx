@@ -10,7 +10,7 @@ export default function Footer() {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 1) {
+            if (window.scrollY > 10) {
                 setIsBlurred(true);
             } else {
                 setIsBlurred(false);
@@ -32,12 +32,10 @@ export default function Footer() {
                 position: "fixed",
                 bottom: 0,
                 left: 0,
-                ...(!isBlurred && {
-                    backgroundColor:
-                        theme.palette.mode === "light" ? "#fafafa" : "#212121",
-                }),
+                backgroundColor: theme.palette.background.default,
+
                 ...(isBlurred && {
-                    backgroundColor: theme.palette.nav,
+                    backgroundColor: theme.palette.background.transparent,
                     backdropFilter: "blur(20px) saturate(0)",
                 }),
                 zIndex: "10",

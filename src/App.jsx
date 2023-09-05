@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // Routage
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, withRouter } from "react-router-dom";
 
 // CSS & MUI
 import { CssBaseline } from "@mui/material";
@@ -18,16 +18,32 @@ import { createCustomTheme } from "./theme";
 import { ThemeProvider } from "@mui/material/styles";
 
 export default function App() {
-    const [themeMode, setThemeMode] = useState("light");
+    // État pour stocker le mode de couleur actuel
+    const [colorMode, setColorMode] = useState("light");
 
+    // Fonction pour basculer manuellement entre les modes clair et sombre
     const toggleTheme = () => {
-        setThemeMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+        setColorMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
     };
 
-    const theme = createCustomTheme(themeMode);
+    // Détecte automatiquement la préférence du navigateur
+    useEffect(() => {
+        const prefersDarkMode = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        ).matches;
+
+        // Défini le mode de couleur en fonction des préférences du navigateur
+        setColorMode(prefersDarkMode ? "dark" : "light");
+    }, []);
+
+    // Créer le thème en fonction du mode de couleur actuel
+    const theme = createCustomTheme(colorMode);
 
     const location = useLocation();
     const isHome = location.pathname === "/";
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location]);
 
     return (
         <ThemeProvider theme={theme}>
@@ -39,6 +55,7 @@ export default function App() {
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/contact" element={<Contact />} />
             </Routes>
+
             {isHome ? null : <Footer />}
         </ThemeProvider>
     );
