@@ -67,6 +67,7 @@ export default function Gallery() {
             <Box
                 component="ul"
                 sx={{
+                    width: "100%",
                     overflow: "hidden",
                     display: "grid",
                     gap: "2vmin",
@@ -119,6 +120,7 @@ export default function Gallery() {
                 onClick={handleCloseModalContent}
                 sx={{
                     cursor: "pointer",
+                    overflow: "hidden",
                     backdropFilter: "blur(20px)",
                     backgroundColor: theme.palette.background.transparent,
                     ".css-1t1j96h-MuiPaper-root-MuiDialog-paper": {

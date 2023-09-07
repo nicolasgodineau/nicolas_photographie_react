@@ -37,6 +37,9 @@ export default function Nav({ toggleTheme }) {
     const location = useLocation();
     const [isBlurred, setIsBlurred] = useState(false);
 
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+
     // Permet l'apparition de la bordure du menu quand on scrool
     const trigger = useScrollTrigger({
         disableHysteresis: true,

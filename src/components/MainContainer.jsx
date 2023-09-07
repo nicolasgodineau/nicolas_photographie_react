@@ -13,9 +13,14 @@ export default function CustomArticleContainer({ children }) {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
+                alignItems: "center",
                 gap: "1rem",
                 paddingY: "2rem",
                 marginBottom: "2rem",
+                [theme.breakpoints.down("sm")]: {
+                    paddingY: "0rem",
+                    marginBottom: "3rem",
+                },
             }}
         >
             {children}

@@ -13,6 +13,8 @@ i18n.use(initReactI18next).init({
                 mariage: "Weddings",
                 paysage: "Landscapes",
                 immobilier: "Real Estate",
+                metaDescription:
+                    "Discover exceptional photographic. Explore photo galleries of captivating photos and immerse yourself in the world of photography.",
                 settingsButton: "Settings",
                 changeLanguage: "Change language",
                 changeMode: "Change mode",
@@ -96,6 +98,8 @@ i18n.use(initReactI18next).init({
                 mariage: "Mariages",
                 paysage: "Paysages",
                 immobilier: "Immobilier",
+                metaDescription:
+                    "Découvrez des photographies exceptionnelles. Explorez des galeries de photos captivantes et plongez-vous dans le monde de la photographie.",
                 settingsButton: "Réglages",
                 changeLanguage: "Changer de langue",
                 changeMode: "Change le mode",

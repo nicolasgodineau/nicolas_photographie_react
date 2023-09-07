@@ -10,6 +10,7 @@ import { Grid, Avatar, Link, Button } from "@mui/material";
 
 // Componentes & Pages & Autre
 import MainContainer from "../components/MainContainer.jsx";
+import { padding } from "@mui/system";
 
 export default function Portfolio() {
     const { t } = useTranslation();
@@ -24,12 +25,15 @@ export default function Portfolio() {
                 container
                 spacing={2}
                 sx={{
+                    alignSelf: "center",
                     display: "flex",
                     justifyContent: "center",
                     padding: "8vmin 0 0",
                     [theme.breakpoints.down("sm")]: {
                         width: "100%",
-                        gap: "2rem",
+                        gap: "1rem",
+                        padding: "0",
+                        margin: "0",
                     },
                 }}
             >
@@ -104,6 +108,10 @@ export default function Portfolio() {
                                         fontWeight: "700 !important",
                                         borderRadius: "0",
                                         boxShadow: 4,
+                                        [theme.breakpoints.down("sm")]: {
+                                            paddingY: "1rem",
+                                            fontSize: "calc(14px + 1vmax)",
+                                        },
                                     }}
                                 >
                                     {title}

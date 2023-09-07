@@ -1,8 +1,8 @@
-import * as React from "react";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import { ButtonGroup, Button, Tooltip, Divider } from "@mui/material";
+import SettingsIcon from "@mui/icons-material/Settings";
 import ChangeLanguageButton from "./ChangeLanguageButton.jsx";
 import ChangeThemeButton from "./ChangeThemeButton.jsx";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -10,27 +10,40 @@ import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 
-import SettingsIcon from "@mui/icons-material/Settings";
-
-export default function BasicMenu({ toggleTheme }) {
+export default function SettingsMenu({ toggleTheme }) {
+    const { t } = useTranslation();
     const theme = useTheme();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+    const [open, setOpen] = React.useState(false);
+    const anchorRef = React.useRef(null);
+
+    const buttons = [
+        <ChangeLanguageButton key="1" />,
+        <Divider key="2" />,
+        <ChangeThemeButton key="3" toggleTheme={toggleTheme} />,
+    ];
+
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
     };
-    const handleClose = () => {
-        setAnchorEl(null);
+
+    const handleClose = (event) => {
+        if (anchorRef.current && anchorRef.current.contains(event.target)) {
+            return;
+        }
+
+        setOpen(false);
     };
 
     return (
         <React.Fragment>
             <Button
-                id="basic-button"
-                aria-controls={open ? "basic-menu" : undefined}
-                aria-haspopup="true"
+                size="small"
+                aria-controls={open ? "split-button-menu" : undefined}
                 aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
+                aria-label="select language or mode"
+                aria-haspopup="menu"
+                title="some more information"
+                onClick={handleToggle}
             >
                 <SettingsIcon />
             </Button>
@@ -39,7 +52,7 @@ export default function BasicMenu({ toggleTheme }) {
                     zIndex: 100,
                 }}
                 open={open}
-                anchorEl={anchorEl}
+                anchorEl={anchorRef.current}
                 role={undefined}
                 transition
                 disablePortal
@@ -56,6 +69,7 @@ export default function BasicMenu({ toggleTheme }) {
                     >
                         <Paper
                             sx={{
+                                borderRadius: "0",
                                 backgroundColor:
                                     theme.palette.background.transparent,
                                 backdropFilter: "blur(20px) saturate(0)",
