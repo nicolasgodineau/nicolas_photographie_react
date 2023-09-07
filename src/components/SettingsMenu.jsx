@@ -1,80 +1,104 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
-import { SpeedDial, SpeedDialAction } from "@mui/material";
+import { ButtonGroup, Button, Tooltip, Divider } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ChangeLanguageButton from "./ChangeLanguageButton.jsx";
 import ChangeThemeButton from "./ChangeThemeButton.jsx";
-import CloseIcon from "@mui/icons-material/Close";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grow from "@mui/material/Grow";
+import Paper from "@mui/material/Paper";
+import Popper from "@mui/material/Popper";
 
 export default function SettingsMenu({ toggleTheme }) {
     const { t } = useTranslation();
     const theme = useTheme();
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = React.useState(false);
+    const anchorRef = React.useRef(null);
 
     const buttons = [
-        { icon: <ChangeLanguageButton />, name: t("changeLanguage") },
-        {
-            icon: <ChangeThemeButton toggleTheme={toggleTheme} />,
-            name: t("changeMode"),
-        },
+        <ChangeLanguageButton key="1" />,
+        <Divider key="2" />,
+        <ChangeThemeButton key="3" toggleTheme={toggleTheme} />,
     ];
 
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
     };
 
-    const handleClose = () => {
+    const handleClose = (event) => {
+        if (anchorRef.current && anchorRef.current.contains(event.target)) {
+            return;
+        }
+
         setOpen(false);
     };
 
     return (
-        <SpeedDial
-            ariaLabel="SpeedDial change language and mode"
-            icon={
-                open ? (
-                    <CloseIcon /> // Icône de fermeture
-                ) : (
-                    <SettingsIcon /> // Icône d'ouverture
-                )
-            }
-            open={open}
-            onOpen={handleToggle}
-            onClose={handleClose}
-            direction="down"
-            sx={{
-                position: "relative",
-                ".MuiSpeedDial-actions": {
-                    position: "absolute",
-                    paddingX: ".5rem",
-                    marginTop: "60px",
-                    paddingTop: "40px",
-                    top: "-56px",
-                    backgroundColor: open
-                        ? theme.palette.background.transparent
-                        : "unset",
-                    backdropFilter: open ? "blur(20px) saturate(0)" : "unset",
-                    zIndex: "1000",
-                },
-                ".MuiSpeedDial-root": {
-                    backgroundColor: "green",
-                },
-                ".MuiSpeedDial-fab": {
-                    minHeight: "30px",
-                    minWidth: "30px",
-                    height: "unset !important",
-                    width: "unset !important",
-                },
-            }}
-        >
-            {buttons.map((button) => (
-                <SpeedDialAction
-                    key={button.name}
-                    icon={button.icon}
-                    tooltipTitle={button.name}
-                    onClick={handleClose}
-                />
-            ))}
-        </SpeedDial>
+        <React.Fragment>
+            <Button
+                size="small"
+                aria-controls={open ? "split-button-menu" : undefined}
+                aria-expanded={open ? "true" : undefined}
+                aria-label="select language or mode"
+                aria-haspopup="menu"
+                title="some more information"
+                onClick={handleToggle}
+            >
+                <SettingsIcon />
+            </Button>
+            <Popper
+                sx={{
+                    zIndex: 100,
+                }}
+                open={open}
+                anchorEl={anchorRef.current}
+                role={undefined}
+                transition
+                disablePortal
+            >
+                {({ TransitionProps, placement }) => (
+                    <Grow
+                        {...TransitionProps}
+                        style={{
+                            transformOrigin:
+                                placement === "bottom"
+                                    ? "center top"
+                                    : "center bottom",
+                        }}
+                    >
+                        <Paper
+                            sx={{
+                                borderRadius: "0",
+                                backgroundColor:
+                                    theme.palette.background.transparent,
+                                backdropFilter: "blur(20px) saturate(0)",
+                                boxShadow: theme.shadows[5],
+                                "& > *": {
+                                    m: 1,
+                                },
+                            }}
+                        >
+                            <ClickAwayListener onClickAway={handleClose}>
+                                <ButtonGroup
+                                    orientation="vertical"
+                                    aria-label="vertical contained button group"
+                                    variant="text"
+                                    sx={{
+                                        gap: ".5rem",
+                                    }}
+                                >
+                                    <ChangeLanguageButton key="1" />
+                                    <ChangeThemeButton
+                                        key="2"
+                                        toggleTheme={toggleTheme}
+                                    />
+                                </ButtonGroup>
+                            </ClickAwayListener>
+                        </Paper>
+                    </Grow>
+                )}
+            </Popper>
+        </React.Fragment>
     );
 }

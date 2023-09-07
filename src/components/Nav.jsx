@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { NavLink } from "react-router-dom";
 
 import {
     Container,
@@ -11,6 +12,9 @@ import {
     Divider,
     Drawer,
     IconButton,
+    Button,
+    ButtonGroup,
+    Typography,
 } from "@mui/material";
 
 import useScrollTrigger from "@mui/material/useScrollTrigger";
@@ -24,7 +28,9 @@ import SettingsMenu from "./SettingsMenu.jsx";
 import ButtonNavLink from "./ButtonNavLink.jsx";
 import ChangeLanguageButton from "./ChangeLanguageButton.jsx";
 import ChangeThemeButton from "./ChangeThemeButton.jsx";
-
+import InstagramIcon from "@mui/icons-material/Instagram";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ContactModal from "./ContactModal.jsx";
 export default function Nav({ toggleTheme }) {
     const { t } = useTranslation();
     const theme = useTheme();
@@ -65,6 +71,7 @@ export default function Nav({ toggleTheme }) {
         <Avatar
             variant="square"
             alt="Logo Nicolas Godineau Photographie"
+            arial-label="logo"
             src={theme.palette.mode === "light" ? logoLight : logoDark}
             sx={{
                 height: "100%",
@@ -72,6 +79,12 @@ export default function Nav({ toggleTheme }) {
             }}
         />
     );
+
+    const buttons = [
+        <ChangeLanguageButton key="1" />,
+        <Divider key="2" sx={{ borderWidth: "1px" }} />,
+        <ChangeThemeButton key="3" toggleTheme={toggleTheme} />,
+    ];
 
     // Est le menu mobile
     const drawer = (
@@ -82,10 +95,8 @@ export default function Nav({ toggleTheme }) {
             <Container
                 maxWidth="xxs"
                 sx={{
-                    [theme.breakpoints.down("sm")]: {
-                        width: "100%",
-                        padding: "1rem",
-                    },
+                    padding: "1rem",
+                    width: "100%",
                 }}
             >
                 {avatar}
@@ -94,25 +105,51 @@ export default function Nav({ toggleTheme }) {
             <Container
                 maxWidth="xxs"
                 sx={{
-                    height: "100%",
-                    minHeight: "35svh",
                     display: "flex",
+                    alignItems: "center",
                     flexDirection: "column",
+                    gap: "3vh",
                     justifyContent: "space-evenly",
+                    padding: "1rem",
                 }}
             >
-                <ButtonNavLink to="portfolio" variantText="h4" />
-                <ButtonNavLink to="contact" variantText="h4" />
-                <Box
-                    sx={{
-                        width: "100%",
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                    }}
-                >
-                    <ChangeLanguageButton />
-                    <ChangeThemeButton toggleTheme={toggleTheme} />
-                </Box>
+                <ButtonNavLink
+                    to="portfolio"
+                    target="_self"
+                    text="portfolio"
+                    variantText="h4"
+                    disableRipple="false"
+                    icon={null}
+                />
+                <ButtonNavLink
+                    to="contact"
+                    target="_self"
+                    text="contact"
+                    variantText="h4"
+                    disableRipple="false"
+                    icon={null}
+                />
+                <ButtonNavLink
+                    to="https://www.instagram.com/nicolasg_travel/"
+                    target="_blank"
+                    text="instagramLandscape"
+                    variantText="h4"
+                    disableRipple="false"
+                    icon={<InstagramIcon />}
+                />
+                <ButtonNavLink
+                    to="https://www.instagram.com/nicolasg_portraits/"
+                    target="_blank"
+                    text="instagramPortrait"
+                    variantText="h4"
+                    disableRipple="false"
+                    icon={<InstagramIcon />}
+                />
+                <ContactModal />
+                <ButtonGroup aria-label="contained button group" variant="text">
+                    <ChangeLanguageButton key="1" />
+                    <ChangeThemeButton key="2" toggleTheme={toggleTheme} />
+                </ButtonGroup>
             </Container>
         </Box>
     );
@@ -173,9 +210,23 @@ export default function Nav({ toggleTheme }) {
                             },
                         }}
                     >
-                        <ButtonNavLink to="portfolio" variantText="h5" />
+                        <ButtonNavLink
+                            to="portfolio"
+                            target="_self"
+                            text="portfolio"
+                            variantText="h6"
+                            disableRipple="true"
+                            icon={null}
+                        />
                         <SettingsMenu toggleTheme={toggleTheme} />
-                        <ButtonNavLink to="contact" variantText="h5" />
+                        <ButtonNavLink
+                            to="contact"
+                            target="_self"
+                            text="contact"
+                            variantText="h6"
+                            disableRipple="true"
+                            icon={null}
+                        />
                     </Container>
                 </Toolbar>
                 <IconButton
@@ -213,7 +264,6 @@ export default function Nav({ toggleTheme }) {
                     "& .MuiDrawer-paper": {
                         boxSizing: "border-box",
                         width: "100%",
-                        minHeight: "40%",
                     },
                 }}
             >

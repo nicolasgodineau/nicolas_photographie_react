@@ -10,16 +10,12 @@ export default function CustomArticleContainer({ children }) {
             component="main"
             maxWidth="lg"
             sx={{
-                width: "100%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
                 gap: "1rem",
-                paddingY: "1rem",
+                paddingY: "2rem",
                 marginBottom: "2rem",
-                [theme.breakpoints.down("sm")]: {
-                    padding: "0.5rem 0 3rem 0",
-                },
             }}
         >
             {children}

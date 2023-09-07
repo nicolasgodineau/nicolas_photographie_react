@@ -13,8 +13,15 @@ i18n.use(initReactI18next).init({
                 mariage: "Weddings",
                 paysage: "Landscapes",
                 immobilier: "Real Estate",
+                settingsButton: "Settings",
                 changeLanguage: "Change language",
                 changeMode: "Change mode",
+                menu: {
+                    portfolio: "Portfolio",
+                    contact: "Contact",
+                    instagramLandscape: "Landscape",
+                    instagramPortrait: "Portrait",
+                },
                 contact: {
                     title: "Contact",
                     field: {
@@ -89,8 +96,15 @@ i18n.use(initReactI18next).init({
                 mariage: "Mariages",
                 paysage: "Paysages",
                 immobilier: "Immobilier",
+                settingsButton: "Réglages",
                 changeLanguage: "Changer de langue",
                 changeMode: "Change le mode",
+                menu: {
+                    portfolio: "Portfolio",
+                    contact: "Contact",
+                    instagramLandscape: "Paysage",
+                    instagramPortrait: "Portrait",
+                },
                 contact: {
                     title: "Contact",
                     field: {

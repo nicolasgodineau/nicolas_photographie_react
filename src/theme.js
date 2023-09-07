@@ -10,16 +10,9 @@ export const lightPalette = {
     },
     background: {
         default: grey[50],
-        SpeeDial: grey[300],
         transparent: "#fafafa7a",
     },
-    button: {
-        main: "black",
-        contrastText: grey[50],
-    },
-    accent: "black",
-    nav: "#fafafa7a",
-    linkActive: "#01579b",
+    link: grey[900],
 };
 
 export const darkPalette = {
@@ -31,15 +24,9 @@ export const darkPalette = {
     },
     background: {
         default: grey[900],
-        SpeeDial: grey[400],
         transparent: "#0000007a",
     },
-    button: {
-        main: grey[50],
-        contrastText: grey[900],
-    },
-    accent: grey[50],
-    nav: "#0000007a",
+    link: grey[50],
 };
 
 export const createCustomTheme = (mode) => {
@@ -53,11 +40,10 @@ export const createCustomTheme = (mode) => {
         breakpoints: {
             values: {
                 xxs: 320,
-                xs: 375,
+                xs: 376,
                 sm: 600,
                 md: 960,
                 lg: 1280,
-                xl: 1920,
             },
         },
     });

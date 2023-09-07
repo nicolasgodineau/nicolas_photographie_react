@@ -1,8 +1,6 @@
 import React from "react";
 import { useTheme } from "@mui/material/styles";
 import { Avatar, Dialog } from "@mui/material";
-import DisabledByDefaultIcon from "@mui/icons-material/DisabledByDefault";
-import CloseIcon from "@mui/icons-material/Close";
 
 export default function ImageModal({ open, onClose, imageUrl }) {
     const theme = useTheme();
@@ -13,7 +11,7 @@ export default function ImageModal({ open, onClose, imageUrl }) {
             onClose={onClose}
             sx={{
                 backdropFilter: "blur(20px)",
-                backgroundColor: theme.palette.nav,
+                backgroundColor: theme.palette.background.transparent,
                 ".css-1t1j96h-MuiPaper-root-MuiDialog-paper": {
                     border: `2px solid ${theme.palette.primary.main}`,
                     backgroundColor: `unset !important`,
@@ -31,15 +29,7 @@ export default function ImageModal({ open, onClose, imageUrl }) {
                     height: "auto",
                 }}
                 loading="lazy"
-            />
-            <CloseIcon
                 onClick={onClose}
-                color="primary"
-                sx={{
-                    fontSize: "40px",
-                    cursor: "pointer",
-                    alignSelf: "center",
-                }}
             />
         </Dialog>
     );

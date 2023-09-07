@@ -40,7 +40,7 @@ export default function Home() {
                     flexDirection: "column",
                     gap: "5vmax",
                     padding: "10vmin",
-                    backgroundColor: theme.palette.nav,
+                    backgroundColor: theme.palette.background.transparent,
                     backdropFilter: "blur(20px)",
                 }}
             >
@@ -70,8 +70,22 @@ export default function Home() {
                         },
                     }}
                 >
-                    <ButtonNavLink to="portfolio" variantText="h5" />
-                    <ButtonNavLink to="contact" variantText="h5" />
+                    <ButtonNavLink
+                        to="portfolio"
+                        target="_self"
+                        text="portfolio"
+                        variantText="h5"
+                        disableRipple="false"
+                        icon={null}
+                    />
+                    <ButtonNavLink
+                        to="contact"
+                        target="_self"
+                        text="contact"
+                        variantText="h5"
+                        disableRipple="false"
+                        icon={null}
+                    />
                 </Box>
             </Container>
         </Container>

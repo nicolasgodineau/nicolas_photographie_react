@@ -25,13 +25,11 @@ export default function Portfolio() {
                 spacing={2}
                 sx={{
                     display: "flex",
-                    justifyContent: "space-between",
+                    justifyContent: "center",
                     padding: "8vmin 0 0",
                     [theme.breakpoints.down("sm")]: {
                         width: "100%",
-                        justifyContent: "center",
                         gap: "2rem",
-                        marginX: "0",
                     },
                 }}
             >
@@ -46,7 +44,7 @@ export default function Portfolio() {
                             item
                             key={index}
                             xs={10}
-                            sm={6}
+                            sm={5}
                             md={3}
                             sx={{
                                 height: "100%",
@@ -67,7 +65,7 @@ export default function Portfolio() {
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    gap: "2rem",
+                                    gap: "calc(5px + 1vmax)",
                                     [theme.breakpoints.down("sm")]: {
                                         gap: ".7rem",
                                         padding: "0 !important",
@@ -86,20 +84,26 @@ export default function Portfolio() {
                                             height: "100%",
                                             width: "100%",
                                             boxShadow: 4,
+                                            transition: "box-shadow",
+                                            transitionDuration: ".3s",
+                                            "&.MuiAvatar-root:hover": {
+                                                boxShadow: 6,
+                                            },
                                         }}
                                     />
                                 </Button>
                                 <Button
-                                    color="button"
                                     variant="contained"
+                                    size="large"
                                     sx={{
                                         width: "100%",
                                         paddingY: ".5rem",
-                                        fontSize: "inherit",
+                                        fontSize: "calc(10px + 1vmax)",
                                         lineHeight: "initial",
                                         fontFamily: "Poiret One",
                                         fontWeight: "700 !important",
                                         borderRadius: "0",
+                                        boxShadow: 4,
                                     }}
                                 >
                                     {title}

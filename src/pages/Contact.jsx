@@ -43,7 +43,7 @@ export default function Contact() {
                     flexWrap: "wrap",
                     justifyContent: "space-evenly",
                     gap: "1rem",
-                    marginY: "1rem",
+                    marginBottom: "2rem",
                 }}
             >
                 <Avatar
@@ -61,7 +61,6 @@ export default function Contact() {
                     }}
                 />
                 <Container
-                    component="section"
                     maxWidth={false}
                     disableGutters={true}
                     sx={{
@@ -101,8 +100,8 @@ export default function Contact() {
                         </Typography>
                     ))}
                 </Container>
+                <ContactModal />
             </Container>
-            <ContactModal />
         </MainContainer>
     );
 }
