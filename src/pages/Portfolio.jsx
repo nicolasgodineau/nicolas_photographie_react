@@ -6,11 +6,19 @@ import { useTranslation } from "react-i18next";
 
 // CSS & MUI
 import { useTheme } from "@mui/material/styles";
-import { Grid, Avatar, Link, Button } from "@mui/material";
+import {
+    Grid,
+    Avatar,
+    Link,
+    Button,
+    ImageList,
+    useMediaQuery,
+    Box,
+    Typography,
+} from "@mui/material";
 
 // Componentes & Pages & Autre
 import MainContainer from "../components/MainContainer.jsx";
-import { padding } from "@mui/system";
 
 export default function Portfolio() {
     const { t } = useTranslation();
@@ -18,23 +26,36 @@ export default function Portfolio() {
 
     const portfolioCards = t("portfolio.cards", { returnObjects: true }) || [];
 
+    const isXSmallScreen = useMediaQuery(theme.breakpoints.down("xxs"));
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down("xs"));
+    const isXMediumScreen = useMediaQuery(theme.breakpoints.down("xsm"));
+    const isMediumScreen = useMediaQuery(theme.breakpoints.down("sm"));
+    const isLargeScreen = useMediaQuery(theme.breakpoints.down("md"));
+    const isXLargeScreen = useMediaQuery(theme.breakpoints.down("lg"));
+
     return (
         <MainContainer>
-            <Grid
+            <ImageList
+                cols={
+                    isXSmallScreen
+                        ? 1
+                        : isSmallScreen
+                        ? 1
+                        : isXMediumScreen
+                        ? 1
+                        : isMediumScreen
+                        ? 2
+                        : isLargeScreen
+                        ? 2
+                        : isXLargeScreen
+                        ? 4
+                        : 4
+                }
                 component="section"
-                container
-                spacing={2}
                 sx={{
-                    alignSelf: "center",
-                    display: "flex",
-                    justifyContent: "center",
+                    width: "100%",
+                    gap: "2vmin",
                     padding: "8vmin 0 0",
-                    [theme.breakpoints.down("sm")]: {
-                        width: "100%",
-                        gap: "1rem",
-                        padding: "0",
-                        margin: "0",
-                    },
                 }}
             >
                 {portfolioCards.map((card, index) => {
@@ -43,62 +64,51 @@ export default function Portfolio() {
                     const folder = card.folder;
                     const numImg = card.num;
                     return (
-                        <Grid
+                        <Box
                             component="article"
-                            item
                             key={index}
-                            xs={10}
-                            sm={5}
-                            md={3}
                             sx={{
-                                height: "100%",
                                 display: "flex",
                                 flexDirection: "column",
+                                gap: "2vmin",
                                 [theme.breakpoints.down("sm")]: {
                                     padding: "1rem !important",
                                 },
                             }}
                         >
-                            <Link
+                            <Button
+                                variant="text"
                                 rel="noopener noreferrer"
                                 underline="none"
                                 component={NavLink}
                                 to="/gallery"
                                 state={{ folder: folder, num: numImg }}
-                                variant="h6"
                                 sx={{
                                     display: "flex",
                                     flexDirection: "column",
-                                    gap: "calc(5px + 1vmax)",
+                                    gap: "2vmin",
+                                    paddingY: ".7rem",
                                     [theme.breakpoints.down("sm")]: {
                                         gap: ".7rem",
                                         padding: "0 !important",
                                     },
                                 }}
                             >
-                                <Button
+                                <Avatar
+                                    variant="square"
+                                    src={require(`../img/Ressources/portfolio/${srcImg}.webp`)}
                                     sx={{
-                                        padding: "0",
+                                        minHeight: "40svh",
+                                        width: "100%",
+                                        boxShadow: 4,
+                                        transition: "box-shadow",
+                                        transitionDuration: ".3s",
+                                        "&.MuiAvatar-root:hover": {
+                                            boxShadow: 8,
+                                        },
                                     }}
-                                >
-                                    <Avatar
-                                        variant="square"
-                                        src={require(`../img/Ressources/portfolio/${srcImg}.webp`)}
-                                        sx={{
-                                            height: "100%",
-                                            width: "100%",
-                                            boxShadow: 4,
-                                            transition: "box-shadow",
-                                            transitionDuration: ".3s",
-                                            "&.MuiAvatar-root:hover": {
-                                                boxShadow: 6,
-                                            },
-                                        }}
-                                    />
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    size="large"
+                                />
+                                <Typography
                                     sx={{
                                         width: "100%",
                                         paddingY: ".5rem",
@@ -106,21 +116,23 @@ export default function Portfolio() {
                                         lineHeight: "initial",
                                         fontFamily: "Poiret One",
                                         fontWeight: "700 !important",
-                                        borderRadius: "0",
+                                        textAlign: "center",
                                         boxShadow: 4,
+                                        backgroundColor:
+                                            theme.palette.primary.main,
+                                        color: theme.palette.secondary.main,
                                         [theme.breakpoints.down("sm")]: {
-                                            paddingY: "1rem",
                                             fontSize: "calc(14px + 1vmax)",
                                         },
                                     }}
                                 >
                                     {title}
-                                </Button>
-                            </Link>
-                        </Grid>
+                                </Typography>
+                            </Button>
+                        </Box>
                     );
                 })}
-            </Grid>
+            </ImageList>
         </MainContainer>
     );
 }

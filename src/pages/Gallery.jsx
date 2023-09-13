@@ -17,6 +17,7 @@ import { useTheme } from "@mui/material/styles";
 // Componentes & Pages & Autre
 import MainContainer from "../components/MainContainer.jsx";
 import BackToTopButton from "../components/BackToTopButton.jsx";
+import Fancybox from "../components/Fancybox.jsx";
 
 export default function Gallery() {
     const location = useLocation("/portfolio");
@@ -64,36 +65,43 @@ export default function Gallery() {
             >
                 {folder}
             </Typography>
-            <Box
-                component="ul"
+            <ImageList
+                cols={
+                    isXSmallScreen
+                        ? 2
+                        : isSmallScreen
+                        ? 2
+                        : isMediumScreen
+                        ? 2
+                        : isLargeScreen
+                        ? 3
+                        : isXLargeScreen
+                        ? 4
+                        : 4
+                }
+                component="section"
                 sx={{
                     width: "100%",
-                    overflow: "hidden",
-                    display: "grid",
                     gap: "2vmin",
-                    gridTemplateColumns: "repeat(auto-fill, 18rem)",
-                    /*                     gridTemplateColumns:
-                        "repeat(auto-fill, minmax(19rem, 1fr)) !important", */
-                    justifyItems: "center",
-                    justifyContent: "center",
-                    padding: "0",
-                    margin: "0",
-                    [theme.breakpoints.down("xs")]: {
-                        gridTemplateColumns: "1fr 1fr",
-                    },
                 }}
             >
                 {imageNames.map((image, index) => (
-                    <Avatar
+                    /*                     <Avatar
+                        component="figure"
                         variant="square"
                         key={index}
                         src={require(`../img/${folder}/Small/${image}`)}
                         loading="lazy"
                         sx={{
-                            height: "min(19rem, 19rem)",
-                            width: "min(19rem, 19rem)",
-
+                            width: "100%",
+                            height: "100%",
+                            minHeight: "170px",
+                            maxHeight: "300px",
+                            minWidth: "170px",
+                            maxWidth: "300px",
+                            aspectRatio: "1/1",
                             padding: "1rem",
+                            margin: "0",
                             cursor: "pointer",
                             filter: "drop-shadow(0 10px 15px rgb(0 0 0 / 0.06)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1))",
                             transition: "filter",
@@ -101,19 +109,28 @@ export default function Gallery() {
                             "&.MuiAvatar-root:hover": {
                                 filter: "drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.5))",
                             },
-                            [theme.breakpoints.down("xs")]: {
-                                height: "min(20vmax, 19rem)",
-                                width: "min(20vmax, 19rem)",
-                            },
                         }}
                         onClick={() =>
                             handleImageClick({
                                 img: require(`../img/${folder}/${image}`),
                             })
                         }
-                    />
+                    /> */
+                    <Fancybox
+                        options={{
+                            Carousel: {
+                                infinite: false,
+                            },
+                        }}
+                    >
+                        <Avatar
+                            src={require(`../img/${folder}/Small/${image}`)}
+                            width="200"
+                            height="200"
+                        />
+                    </Fancybox>
                 ))}
-            </Box>
+            </ImageList>
             <Dialog
                 open={!!selectedImage}
                 onClose={handleCloseModal}

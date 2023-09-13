@@ -104,7 +104,12 @@ export default function ContactModal() {
             <Button
                 variant="contained"
                 size="large"
-                sx={{ width: "20vmax", minWidth: "300px", alignSelf: "center" }}
+                sx={{
+                    width: "20vmax",
+                    minWidth: "300px",
+                    alignSelf: "center",
+                    borderRadius: "0",
+                }}
                 onClick={handleOpen}
             >
                 {t("contact.field.title")} 👋🏻👋🏻👋🏻

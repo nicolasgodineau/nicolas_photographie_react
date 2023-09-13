@@ -41,6 +41,7 @@ export const createCustomTheme = (mode) => {
             values: {
                 xxs: 320,
                 xs: 376,
+                xsm: 500,
                 sm: 600,
                 md: 960,
                 lg: 1280,
