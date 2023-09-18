@@ -56,9 +56,12 @@ export default function Portfolio() {
                     width: "100%",
                     gap: "2vmin",
                     padding: "8vmin 0 0",
+                    overflow: "hidden",
                 }}
             >
                 {portfolioCards.map((card, index) => {
+                    const delay100 = index * 100;
+                    const delay200 = index * 150;
                     const title = card.title;
                     const srcImg = card.imgSrc;
                     const folder = card.folder;
@@ -75,6 +78,8 @@ export default function Portfolio() {
                                     padding: "1rem !important",
                                 },
                             }}
+                            data-aos="fade"
+                            data-aos-delay={delay100}
                         >
                             <Button
                                 variant="text"
@@ -93,6 +98,8 @@ export default function Portfolio() {
                                         padding: "0 !important",
                                     },
                                 }}
+                                data-aos="fade"
+                                data-aos-delay={delay100}
                             >
                                 <Avatar
                                     variant="square"
@@ -107,6 +114,8 @@ export default function Portfolio() {
                                             boxShadow: 8,
                                         },
                                     }}
+                                    data-aos="fade-up"
+                                    data-aos-delay={delay200}
                                 />
                                 <Typography
                                     sx={{
@@ -125,6 +134,8 @@ export default function Portfolio() {
                                             fontSize: "calc(14px + 1vmax)",
                                         },
                                     }}
+                                    data-aos="fade-up"
+                                    data-aos-delay={delay200}
                                 >
                                     {title}
                                 </Typography>

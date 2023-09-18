@@ -30,6 +30,8 @@ export default function Contact() {
                             ? theme.palette.primary
                             : theme.palette.secondary,
                 }}
+                data-aos="zoom-in"
+                data-aos-delay="100"
             >
                 {t("contact.title")}
             </Typography>
@@ -59,6 +61,8 @@ export default function Contact() {
                             width: "fit-content",
                         },
                     }}
+                    data-aos="fade-right"
+                    data-aos-delay="100"
                 />
                 <Container
                     maxWidth={false}
@@ -72,33 +76,40 @@ export default function Contact() {
                         padding: "0",
                         margin: "0 !important",
                     }}
+                    data-aos="fade-left"
+                    data-aos-delay="100"
                 >
-                    {aboutText.map((text, index) => (
-                        <Typography
-                            component="p"
-                            variant={
-                                index === aboutText.length - 1 ? "h4" : "h6"
-                            }
-                            key={index}
-                            sx={{
-                                fontFamily: "Poiret One",
-                                paddingX:
-                                    index === aboutText.length - 1
-                                        ? "1rem"
-                                        : "0",
-                                textAlign:
-                                    index === aboutText.length - 1
-                                        ? "right"
-                                        : "left",
-                                fontStyle:
-                                    index === aboutText.length - 1
-                                        ? "italic"
-                                        : "normal",
-                            }}
-                        >
-                            {text.element}
-                        </Typography>
-                    ))}
+                    {aboutText.map((text, index) => {
+                        const delay = index * 200;
+                        return (
+                            <Typography
+                                component="p"
+                                variant={
+                                    index === aboutText.length - 1 ? "h4" : "h6"
+                                }
+                                key={index}
+                                sx={{
+                                    fontFamily: "Poiret One",
+                                    paddingX:
+                                        index === aboutText.length - 1
+                                            ? "1rem"
+                                            : "0",
+                                    textAlign:
+                                        index === aboutText.length - 1
+                                            ? "right"
+                                            : "left",
+                                    fontStyle:
+                                        index === aboutText.length - 1
+                                            ? "italic"
+                                            : "normal",
+                                }}
+                                data-aos="fade-left"
+                                data-aos-delay={delay}
+                            >
+                                {text.element}
+                            </Typography>
+                        );
+                    })}
                 </Container>
                 <ContactModal />
             </Container>

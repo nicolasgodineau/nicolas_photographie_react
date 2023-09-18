@@ -14,6 +14,9 @@ import "./index.css";
 // Componentes & Pages
 import App from "./App";
 
+// Annimation
+import "aos/dist/aos.css";
+
 const language = i18n.language;
 
 const descriptions = {
@@ -22,7 +25,6 @@ const descriptions = {
 };
 
 const metaDescription = document.querySelector('meta[name="description"]');
-console.log("metaDescription:", metaDescription);
 metaDescription.setAttribute("content", descriptions[language]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

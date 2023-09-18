@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // Routage
 import { useLocation } from "react-router-dom";
 
@@ -62,6 +62,8 @@ export default function Gallery() {
                             ? theme.palette.primary
                             : theme.palette.secondary,
                 }}
+                data-aos="zoom-in"
+                data-aos-delay="100"
             >
                 {folder}
             </Typography>
@@ -83,53 +85,46 @@ export default function Gallery() {
                 sx={{
                     width: "100%",
                     gap: "2vmin",
+                    overflow: "hidden",
                 }}
+                data-aos="fade-up"
             >
-                {imageNames.map((image, index) => (
-                    /*                     <Avatar
-                        component="figure"
-                        variant="square"
-                        key={index}
-                        src={require(`../img/${folder}/Small/${image}`)}
-                        loading="lazy"
-                        sx={{
-                            width: "100%",
-                            height: "100%",
-                            minHeight: "170px",
-                            maxHeight: "300px",
-                            minWidth: "170px",
-                            maxWidth: "300px",
-                            aspectRatio: "1/1",
-                            padding: "1rem",
-                            margin: "0",
-                            cursor: "pointer",
-                            filter: "drop-shadow(0 10px 15px rgb(0 0 0 / 0.06)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1))",
-                            transition: "filter",
-                            transitionDuration: ".3s",
-                            "&.MuiAvatar-root:hover": {
-                                filter: "drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.5))",
-                            },
-                        }}
-                        onClick={() =>
-                            handleImageClick({
-                                img: require(`../img/${folder}/${image}`),
-                            })
-                        }
-                    /> */
-                    <Fancybox
-                        options={{
-                            Carousel: {
-                                infinite: false,
-                            },
-                        }}
-                    >
+                {imageNames.map((image, index) => {
+                    return (
                         <Avatar
+                            component="figure"
+                            variant="square"
+                            key={index}
                             src={require(`../img/${folder}/Small/${image}`)}
-                            width="200"
-                            height="200"
+                            loading="lazy"
+                            sx={{
+                                width: "100%",
+                                height: "100%",
+                                minHeight: "170px",
+                                maxHeight: "300px",
+                                minWidth: "170px",
+                                maxWidth: "300px",
+                                aspectRatio: "1/1",
+                                padding: "1rem",
+                                margin: "0",
+                                cursor: "pointer",
+                                filter: "drop-shadow(0 10px 15px rgb(0 0 0 / 0.06)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1))",
+                                transition: "filter",
+                                transitionDuration: ".3s",
+                                "&.MuiAvatar-root:hover": {
+                                    filter: "drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.5))",
+                                },
+                            }}
+                            onClick={() =>
+                                handleImageClick({
+                                    img: require(`../img/${folder}/${image}`),
+                                })
+                            }
+                            data-aos="fade-up"
+                            data-aos-delay="200"
                         />
-                    </Fancybox>
-                ))}
+                    );
+                })}
             </ImageList>
             <Dialog
                 open={!!selectedImage}

@@ -100,7 +100,11 @@ export default function ContactModal() {
     }, []);
 
     return (
-        <Box sx={{ alignSelf: "center" }}>
+        <Box
+            sx={{ alignSelf: "center" }}
+            data-aos="fade-down"
+            data-aos-delay="100"
+        >
             <Button
                 variant="contained"
                 size="large"
