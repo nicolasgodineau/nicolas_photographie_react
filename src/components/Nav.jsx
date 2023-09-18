@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { NavLink } from "react-router-dom";
-
 import {
     Container,
     Avatar,
@@ -12,9 +8,7 @@ import {
     Divider,
     Drawer,
     IconButton,
-    Button,
     ButtonGroup,
-    Typography,
 } from "@mui/material";
 
 import useScrollTrigger from "@mui/material/useScrollTrigger";
@@ -29,16 +23,10 @@ import ButtonNavLink from "./ButtonNavLink.jsx";
 import ChangeLanguageButton from "./ChangeLanguageButton.jsx";
 import ChangeThemeButton from "./ChangeThemeButton.jsx";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import DeleteIcon from "@mui/icons-material/Delete";
 import ContactModal from "./ContactModal.jsx";
 export default function Nav({ toggleTheme }) {
-    const { t } = useTranslation();
     const theme = useTheme();
-    const location = useLocation();
     const [isBlurred, setIsBlurred] = useState(false);
-
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     // Permet l'apparition de la bordure du menu quand on scrool
     const trigger = useScrollTrigger({
@@ -82,12 +70,6 @@ export default function Nav({ toggleTheme }) {
             }}
         />
     );
-
-    const buttons = [
-        <ChangeLanguageButton key="1" />,
-        <Divider key="2" sx={{ borderWidth: "1px" }} />,
-        <ChangeThemeButton key="3" toggleTheme={toggleTheme} />,
-    ];
 
     // Est le menu mobile
     const drawer = (

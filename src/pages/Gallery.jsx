@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 // Routage
 import { useLocation } from "react-router-dom";
 
@@ -7,9 +7,7 @@ import {
     Typography,
     Dialog,
     ImageList,
-    ImageListItem,
     useMediaQuery,
-    Box,
     Avatar,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -17,7 +15,6 @@ import { useTheme } from "@mui/material/styles";
 // Componentes & Pages & Autre
 import MainContainer from "../components/MainContainer.jsx";
 import BackToTopButton from "../components/BackToTopButton.jsx";
-import Fancybox from "../components/Fancybox.jsx";
 
 export default function Gallery() {
     const location = useLocation("/portfolio");
@@ -96,6 +93,7 @@ export default function Gallery() {
                             variant="square"
                             key={index}
                             src={require(`../img/${folder}/Small/${image}`)}
+                            alt={`${folder}_${image}`}
                             loading="lazy"
                             sx={{
                                 width: "100%",
@@ -143,6 +141,7 @@ export default function Gallery() {
             >
                 <img
                     src={selectedImage?.img}
+                    alt={selectedImage?.img}
                     style={{
                         maxHeight: "70vh",
                         maxWidth: "100%",

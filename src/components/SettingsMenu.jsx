@@ -1,8 +1,6 @@
-import * as React from "react";
+import React from "react";
 import { useTheme } from "@mui/material/styles";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import { ButtonGroup, Button, Tooltip, Divider } from "@mui/material";
+import { ButtonGroup, Button } from "@mui/material";
 import ChangeLanguageButton from "./ChangeLanguageButton.jsx";
 import ChangeThemeButton from "./ChangeThemeButton.jsx";
 import ClickAwayListener from "@mui/material/ClickAwayListener";

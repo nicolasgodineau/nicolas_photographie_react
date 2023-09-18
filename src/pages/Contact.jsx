@@ -5,8 +5,7 @@ import { useTranslation } from "react-i18next";
 
 // CSS & MUI
 import { useTheme } from "@mui/material/styles";
-import { Avatar, Container, Typography, Box } from "@mui/material";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
+import { Avatar, Container, Typography } from "@mui/material";
 
 // Componentes & Pages & Autre
 import MainContainer from "../components/MainContainer.jsx";
@@ -17,7 +16,6 @@ export default function Contact() {
     const { t } = useTranslation();
     const theme = useTheme();
     const aboutText = t("contact.intro", { returnObjects: true }) || [];
-    const trigger = useScrollTrigger();
     return (
         <MainContainer>
             <Typography

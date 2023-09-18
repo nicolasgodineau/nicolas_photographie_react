@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { AppBar, Box, Fab, IconButton, Toolbar } from "@mui/material";
+import { Fab } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 export default function MyAppBar() {
