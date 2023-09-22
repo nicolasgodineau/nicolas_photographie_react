@@ -10,7 +10,7 @@ export default function ImageModal({ open, onClose, imageUrl }) {
             open={open}
             onClose={onClose}
             sx={{
-                backdropFilter: "blur(200px)",
+                backdropFilter: "blur(20px)",
                 backgroundColor: theme.palette.background.transparent,
                 ".css-1t1j96h-MuiPaper-root-MuiDialog-paper": {
                     backgroundColor: `unset !important`,
