@@ -5,15 +5,18 @@ import { useLocation } from "react-router-dom";
 // CSS & MUI
 import {
     Typography,
-    Dialog,
-    ImageList,
-    useMediaQuery,
+    Button,
     Avatar,
+    Grid,
+    Dialog,
+    DialogActions,
 } from "@mui/material";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
 import { useTheme } from "@mui/material/styles";
 
 // Componentes & Pages & Autre
 import MainContainer from "../components/MainContainer.jsx";
+import ImageModal from "../components/ImageModal.jsx";
 import BackToTopButton from "../components/BackToTopButton.jsx";
 
 export default function Gallery() {
@@ -27,23 +30,18 @@ export default function Gallery() {
         { length: num },
         (_, index) => `img_${index + 1}.webp`
     );
+    const thumbnailImages = imageNames.map((imageName) =>
+        require(`../img/${folder}/Small/${imageName}`)
+    );
 
-    const isXSmallScreen = useMediaQuery(theme.breakpoints.down("xxs"));
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down("xs"));
-    const isMediumScreen = useMediaQuery(theme.breakpoints.down("sm"));
-    const isLargeScreen = useMediaQuery(theme.breakpoints.down("md"));
-    const isXLargeScreen = useMediaQuery(theme.breakpoints.down("lg"));
+    const shuffledImagesThumbnail = [...thumbnailImages];
+    shuffledImagesThumbnail.sort(() => Math.random() - 0.5);
 
-    const handleImageClick = (image) => {
+    const openModal = (image) => {
         setSelectedImage(image);
     };
 
-    const handleCloseModal = (reason) => {
-        if (reason === "backdropClick" || reason === "modalContentClick") {
-            setSelectedImage(null);
-        }
-    };
-    const handleCloseModalContent = () => {
+    const closeModal = () => {
         setSelectedImage(null);
     };
 
@@ -59,95 +57,65 @@ export default function Gallery() {
                             ? theme.palette.primary
                             : theme.palette.secondary,
                 }}
-                data-aos="zoom-in"
-                data-aos-delay="100"
             >
                 {folder}
             </Typography>
-            <ImageList
-                cols={
-                    isXSmallScreen
-                        ? 2
-                        : isSmallScreen
-                        ? 2
-                        : isMediumScreen
-                        ? 2
-                        : isLargeScreen
-                        ? 3
-                        : isXLargeScreen
-                        ? 4
-                        : 4
-                }
+            <Grid
                 component="section"
+                container
+                spacing={2}
                 sx={{
-                    width: "100%",
-                    gap: "2vmin",
-                    overflow: "hidden",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                    padding: "1rem",
                 }}
-                data-aos="fade-up"
             >
-                {imageNames.map((image, index) => {
-                    return (
-                        <Avatar
-                            component="figure"
+                {shuffledImagesThumbnail.map((image, index) => (
+                    <Grid
+                        component="article"
+                        key={index}
+                        item
+                        xxs={5}
+                        xs={5}
+                        sm={4}
+                        md={4}
+                        lg={3}
+                        sx={{
+                            display: "inline-flex",
+                            justifyContent: "center",
+                            cursor: "pointer",
+                        }}
+                    >
+                        <img
                             variant="square"
-                            key={index}
-                            src={require(`../img/${folder}/Small/${image}`)}
-                            alt={`${folder}_${image}`}
-                            loading="lazy"
-                            sx={{
+                            src={image}
+                            alt={`Collage ${index + 1}`}
+                            style={{
                                 width: "100%",
-                                height: "100%",
-                                minHeight: "170px",
+                                height: "auto",
+                                minHeight: "100px",
+                                minWidth: "100px",
                                 maxHeight: "300px",
-                                minWidth: "170px",
                                 maxWidth: "300px",
-                                aspectRatio: "1/1",
-                                padding: "1rem",
-                                margin: "0",
-                                cursor: "pointer",
-                                filter: "drop-shadow(0 10px 15px rgb(0 0 0 / 0.06)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1))",
-                                transition: "filter",
-                                transitionDuration: ".3s",
-                                "&.MuiAvatar-root:hover": {
-                                    filter: "drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.5))",
-                                },
+                                objectFit: "cover",
+                                objectPosition: "50% 50%",
+                                aspectRatio: "1 / 1",
+                                minHeightt: "100%",
                             }}
-                            onClick={() =>
-                                handleImageClick({
-                                    img: require(`../img/${folder}/${image}`),
-                                })
-                            }
-                            data-aos="fade-up"
-                            data-aos-delay="200"
+                            loading="lazy"
+                            onClick={() => openModal(image)}
                         />
-                    );
-                })}
-            </ImageList>
-            <Dialog
-                open={!!selectedImage}
-                onClose={handleCloseModal}
-                onClick={handleCloseModalContent}
-                sx={{
-                    cursor: "pointer",
-                    overflow: "hidden",
-                    backdropFilter: "blur(20px)",
-                    backgroundColor: theme.palette.background.transparent,
-                    ".css-1t1j96h-MuiPaper-root-MuiDialog-paper": {
-                        backgroundColor: `unset !important`,
-                        borderRadius: "0px !important",
-                    },
-                }}
-            >
-                <img
-                    src={selectedImage?.img}
-                    alt={selectedImage?.img}
-                    style={{
-                        maxHeight: "70vh",
-                        maxWidth: "100%",
-                    }}
+                    </Grid>
+                ))}
+            </Grid>
+            {selectedImage && (
+                <ImageModal
+                    open={Boolean(selectedImage)}
+                    onClose={closeModal}
+                    imageUrl={selectedImage}
                 />
-            </Dialog>
+            )}
             <BackToTopButton />
         </MainContainer>
     );
