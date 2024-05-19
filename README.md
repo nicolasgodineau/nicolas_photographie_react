@@ -1,3 +1,35 @@
+# Welcome to My Photography Website Project 📸
+
+Welcome to the README of my photography website project! 👋🏻👋🏻👋🏻
+
+I'm thrilled to introduce this project where I've applied my web development skills, freshly acquired during my web developer training.
+
+This site serves as a showcase for my photography work, featuring various categories such as landscapes, portraits, weddings, and real estate.
+
+## Technologies Used 🚀
+
+This project was developed using several modern technologies to provide a smooth and aesthetically pleasing user experience. Here are some of the key technologies I used:
+
+- **React**: I chose React, a modern JavaScript framework, for building the user interface of my website.
+
+- **Material-UI (MUI)**: To ensure a polished look and consistency in user interface components, I integrated Material-UI. This greatly simplified the creation of the user interface.
+
+- **AOS (Animate On Scroll)**: I included the JavaScript library AOS to add animations when scrolling the page. These animations provide an additional visual dimension to my website, making it more attractive to visitors.✨
+
+- **i18next**: My website supports multiple languages thanks to i18next, a language management library. This allows an international audience to navigate and appreciate my work.
+
+- **Herotofu for the contact form**: I integrated Herotofu to create an interactive contact form.📬
+
+- **React.lazy**: To optimize loading performance, I used React.lazy for lazy loading components. This offers a smoother user experience.
+
+This project was an opportunity for me to apply my new web development skills, especially in the context of creating a React application.
+
+I hope you enjoy visiting my photography website, and please don't hesitate to contact me through the contact form if you have any questions or comments.
+
+Thank you for your interest and support! 🤝🏻
+
+***
+
 # Bienvenue sur mon projet de site web de photographie 📸
 
 Bienvenue sur le README de mon projet de site web de photographie ! 👋🏻👋🏻👋🏻
