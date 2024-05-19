@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { Fab } from "@mui/material";
+import { useMediaQuery, Fab } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-export default function MyAppBar() {
+export default function BackToTopButton() {
     const theme = useTheme();
     const [isVisible, setIsVisible] = useState(false);
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
     const toggleVisibility = () => {
         setIsVisible(window.scrollY > 300);
@@ -36,6 +37,7 @@ export default function MyAppBar() {
         isVisible && (
             <Fab
                 onClick={scrollToTop}
+                size={isSmallScreen ? "small" : "large"}
                 aria-label="Back to Top"
                 color="secondary"
                 sx={{
