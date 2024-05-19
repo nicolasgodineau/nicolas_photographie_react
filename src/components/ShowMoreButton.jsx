@@ -2,8 +2,12 @@ import React from "react";
 import { useMediaQuery, Fab } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
+// Multilingue
+import { useTranslation } from "react-i18next";
+
 export default function ShowMore({ onClick, visibleCount, totalCount }) {
     const theme = useTheme();
+    const { t } = useTranslation();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
     return (
@@ -21,7 +25,7 @@ export default function ShowMore({ onClick, visibleCount, totalCount }) {
                 zIndex: 0,
             }}
         >
-            Voir plus {visibleCount} / {totalCount}
+            {t("showMore")} {visibleCount} / {totalCount}
         </Fab>
     );
 }

@@ -18,6 +18,7 @@ i18n.use(initReactI18next).init({
                 settingsButton: "Settings",
                 changeLanguage: "Change language",
                 changeMode: "Change mode",
+                showMore: "Show More",
                 menu: {
                     portfolio: "Portfolio",
                     contact: "Contact",
@@ -103,6 +104,7 @@ i18n.use(initReactI18next).init({
                 settingsButton: "Réglages",
                 changeLanguage: "Changer de langue",
                 changeMode: "Change le mode",
+                showMore: "Voir plus",
                 menu: {
                     portfolio: "Portfolio",
                     contact: "Contact",
