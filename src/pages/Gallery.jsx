@@ -3,15 +3,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 // CSS & MUI
-import {
-    Typography,
-    Button,
-    Avatar,
-    Grid,
-    Dialog,
-    DialogActions,
-} from "@mui/material";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
+import { Typography, Grid } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 // Componentes & Pages & Autre

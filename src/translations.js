@@ -77,7 +77,7 @@ i18n.use(initReactI18next).init({
                             title: "Landscapes",
                             imgSrc: "Portfolio03",
                             folder: "paysages",
-                            num: 89,
+                            num: 90,
                         },
                         {
                             title: "Real Estate",
@@ -162,7 +162,7 @@ i18n.use(initReactI18next).init({
                             title: "Paysages",
                             imgSrc: "Portfolio03",
                             folder: "paysages",
-                            num: 89,
+                            num: 90,
                         },
                         {
                             title: "Immobilier",

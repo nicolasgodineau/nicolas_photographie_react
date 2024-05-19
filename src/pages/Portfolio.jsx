@@ -7,9 +7,7 @@ import { useTranslation } from "react-i18next";
 // CSS & MUI
 import { useTheme } from "@mui/material/styles";
 import {
-    Grid,
     Avatar,
-    Link,
     Button,
     ImageList,
     useMediaQuery,
