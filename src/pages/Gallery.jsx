@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // Routage
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 // CSS & MUI
 import { Typography, Grid } from "@mui/material";
