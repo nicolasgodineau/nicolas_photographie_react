@@ -3,50 +3,30 @@
   "homepage": "https://nicolasgodineau.com/",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "build-and-zip": "npm run build && cd build && zip -r ../build.zip * && cd .."
+  },
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@fancyapps/ui": "^5.0.36",
     "@mui/icons-material": "^5.15.18",
     "@mui/material": "^5.15.18",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "aos": "^2.3.4",
     "i18next": "^23.11.4",
     "react": "^18.3.1",
-    "react-device-detect": "^2.2.3",
     "react-dom": "^18.3.1",
     "react-dom-confetti": "^0.2.0",
     "react-hook-form": "^7.51.4",
     "react-i18next": "^13.5.0",
-    "react-router-dom": "^6.23.1",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-router-dom": "^6.23.1"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build-and-zip": "npm run build && cd build && zip -r ../build.zip * && cd .."
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
+    "vite": "^8.3.4"
   }
 }

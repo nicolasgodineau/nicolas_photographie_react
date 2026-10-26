@@ -18,6 +18,12 @@ import {
 // Componentes & Pages & Autre
 import MainContainer from "../components/MainContainer.jsx";
 
+// Images des cartes du portfolio, indexées par chemin
+const portfolioImages = import.meta.glob("../img/Ressources/portfolio/*.webp", {
+    eager: true,
+    import: "default",
+});
+
 export default function Portfolio() {
     const { t } = useTranslation();
     const theme = useTheme();
@@ -101,7 +107,7 @@ export default function Portfolio() {
                             >
                                 <Avatar
                                     variant="square"
-                                    src={require(`../img/Ressources/portfolio/${srcImg}.webp`)}
+                                    src={portfolioImages[`../img/Ressources/portfolio/${srcImg}.webp`]}
                                     sx={{
                                         minHeight: "40svh",
                                         width: "100%",
