@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@mui/material/styles";
 import { Button, Link } from "@mui/material";
