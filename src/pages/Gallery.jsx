@@ -12,6 +12,12 @@ import ImageModal from "../components/ImageModal.jsx";
 import BackToTopButton from "../components/BackToTopButton.jsx";
 import ShowMore from "../components/ShowMoreButton.jsx";
 
+// Toutes les miniatures des galeries, indexées par chemin (ex. "../img/mariages/Small/img_1.webp")
+const thumbnails = import.meta.glob("../img/*/Small/*.webp", {
+    eager: true,
+    import: "default",
+});
+
 export default function Gallery() {
     const location = useLocation("/portfolio");
     const theme = useTheme();
@@ -26,9 +32,9 @@ export default function Gallery() {
             { length: num },
             (_, index) => `img_${index + 1}.webp`
         );
-        const thumbnailImages = imageNames.map((imageName) =>
-            require(`../img/${folder}/Small/${imageName}`)
-        );
+        const thumbnailImages = imageNames
+            .map((imageName) => thumbnails[`../img/${folder}/Small/${imageName}`])
+            .filter(Boolean);
         const shuffledImages = [...thumbnailImages];
         shuffledImages.sort(() => Math.random() - 0.5);
         setShuffledImagesThumbnail(shuffledImages);
